@@ -37,7 +37,7 @@ export const style = StyleSheet.create({
   },
 
   calendar: {
-    width: 360,
+    width: 370,
   },
 
   arrowContainer: {
@@ -215,10 +215,10 @@ export const calendarTheme = {
     margin: 0,
     padding: 0,
   },
-  //textDayFontFamily: themes.fonts.main,
+  textDayFontFamily: themes.fonts.podkova,
   textMonthFontFamily: themes.fonts.main,
-  //textDayHeaderFontFamily: themes.fonts.main,
-  textDayFontSize: 16,
+  textDayHeaderFontFamily: themes.fonts.podkova,
+  textDayFontSize: 17,
   textMonthFontSize: 20,
   textDayHeaderFontSize: 15,
   

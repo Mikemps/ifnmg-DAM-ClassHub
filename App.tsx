@@ -5,6 +5,7 @@ import Routes from './src/routes/routes';
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Jaro-Regular': require('./assets/fonts/Jaro-Regular.ttf'),
+    'Podkova-Regular': require('./assets/fonts/Podkova-Regular.ttf'),
   });
 
   if (!fontsLoaded) {

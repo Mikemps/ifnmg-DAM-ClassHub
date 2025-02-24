@@ -1,5 +1,4 @@
 
-
 export const themes = {
     colors:{
         verdeEscuro: "rgb(0, 53, 14)",
@@ -12,7 +11,8 @@ export const themes = {
 
     
     fonts:{
-        main: 'Jaro-Regular'
+        main: 'Jaro-Regular',
+        podkova: 'Podkova-Regular',
     },
 
     strings: {
