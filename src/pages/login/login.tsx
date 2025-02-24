@@ -40,12 +40,7 @@ export default function Login() {
           {({ pressed }) => ( <>
               <Image
                 source={IconGmail}
-                style={{
-                  width: 30,
-                  height: 23,
-                  marginRight: 10,
-                  left: 5,
-                  tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
+                style={{tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
                 }}
                 resizeMode="contain"
               />
@@ -78,12 +73,7 @@ export default function Login() {
           {({ pressed }) => ( <>
               <Image
                 source={IconApple}
-                style={{
-                  width: 30,
-                  height: 28,
-                  marginRight: 10,
-                  left: 5,
-                  tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
+                style={{tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
                 }}
                 resizeMode="contain"
               />

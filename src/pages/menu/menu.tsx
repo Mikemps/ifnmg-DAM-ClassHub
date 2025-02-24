@@ -92,12 +92,7 @@ export default function Menu() {
           {({ pressed }) => ( <>
               <Image
                 source={IconLogout}
-                style={{
-                  width: 30,
-                  height: 28,
-                  marginRight: 10,
-                  left: 5,
-                  tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
+                style={{tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
                 }}
                 resizeMode="contain"
               />

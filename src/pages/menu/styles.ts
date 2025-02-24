@@ -1,7 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { themes } from "../../global/themes"; 
 
-
 export const style = StyleSheet.create({
     container:{
         flex: 1,
@@ -100,5 +99,5 @@ export const style = StyleSheet.create({
         fontWeight: 400,
         color: themes.colors.verdeEscuro,
         fontFamily: themes.fonts.main
-    }
+    },
 }); 
