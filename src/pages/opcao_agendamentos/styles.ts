@@ -1,30 +1,26 @@
 import { StyleSheet } from 'react-native';
-import { themes } from '../../global/themes'; // Certifique-se de que o caminho está correto
+import { themes } from '../../global/themes'; 
 
 export const style = StyleSheet.create({
-    // Container principal
     container: {
         flex: 1,
         alignItems: 'center',
         backgroundColor: themes.colors.verdeClaro,
     },
 
-    // Cabeçalho: Logo, texto "Agendamentos" e linha de cima
     boxTop: {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 50, // Espaço no topo
+        paddingTop: 50, 
     },
 
-    // Logo
     logo: {
         width: 45,
         height: 45,
         marginBottom: 15, 
     },
 
-    // Texto "Agendamentos"
     textAgendamentos: {
         fontSize: 24,
         fontWeight: '400',
@@ -32,29 +28,27 @@ export const style = StyleSheet.create({
         fontFamily: themes.fonts.main,
     },
 
-    // Linha horizontal (cima)
     linhaCima: {
-        width: '90%', // 90% da largura da tela
-        height: 1, // Altura da linha
-        backgroundColor: themes.colors.verdeEscuro, // Cor da linha
-        marginTop: 10, // Espaço abaixo do texto "Agendamentos"
-        marginBottom: 10, // Espaço acima dos horários
+        width: '90%',
+        height: 1, 
+        backgroundColor: themes.colors.verdeEscuro, 
+        marginTop: 10, 
+        marginBottom: 10, 
     },
 
-    // Container dos botões de horários
     boxButtonMessages: {
-        width: '90%', // 90% da largura da tela
-        marginBottom: 10, // Espaço entre os horários
-        alignSelf: 'center', // Centraliza horizontalmente
+        width: '90%', 
+        marginBottom: 10, 
+        alignSelf: 'center', 
     },
 
-    // Botão de horário (com laterais arredondadas)
     buttonMessages: {
-        width: '100%', // Ocupa toda a largura do container
+        width: '100%', 
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
     },
+
     buttonMessagesSelected: {
         backgroundColor: themes.colors.verdeEscuro, 
     },
@@ -62,7 +56,7 @@ export const style = StyleSheet.create({
     textMsgAgendamentosSelected: {
         color: themes.colors.branco8, 
     },
-    // Texto dentro do botão de horário
+
     textMsgAgendamentos: {
         fontSize: 20,
         fontFamily: themes.fonts.main,
@@ -70,106 +64,94 @@ export const style = StyleSheet.create({
         marginRight: 10,
     },
 
-    // Container da lista de horários (centralizado com espaço maior abaixo)
     horariosContainer: {
         width: '100%',
     },
 
-    // Linha horizontal (baixo)
     linhaBaixo: {
-        width: '90%', // 90% da largura da tela
-        height: 1, // Altura da linha
-        backgroundColor: themes.colors.verdeEscuro, // Cor da linha
-        marginTop: 20, // Espaço acima da linha
+        width: '90%', 
+        height: 1, 
+        backgroundColor: themes.colors.verdeEscuro, 
+        marginTop: 20, 
     },
 
-    // Container do rodapé (linha de baixo e botões)
     rodape: {
         width: '100%',
         alignItems: 'center',
-        paddingBottom: 55, // Espaço no rodapé
+        paddingBottom: 55, 
     },
 
-    // Botão "Voltar"
     buttonVoltar: {
         width: 45,
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: themes.colors.branco8,
-        borderRadius: 30, // Botão redondo
-        marginRight: 10, // Espaço entre os botões
-        elevation: 4, // Sombra no Android
+        borderRadius: 30, 
+        marginRight: 10, 
+        elevation: 4, 
     },
 
-    // Ícone dentro do botão "Voltar"
     Voltar: {
         width: 25,
         height: 38,
     },
 
-    // Botão "Cancelar Agendamento"
     buttonCancelar: {
-        width: 279, // Largura fixa para o botão "Cancelar Agendamento"
+        width: 279, 
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: themes.colors.branco8,
-        borderRadius: 30, // Bordas arredondadas
-        elevation: 4, // Sombra no Android
+        borderRadius: 30, 
+        elevation: 4,
     },
 
-    // Texto dentro do botão "Cancelar Agendamento"
     textCancelarAgendamento: {
         fontSize: 20,
         color: themes.colors.verdeEscuro,
         fontFamily: themes.fonts.main,
     },
 
-    // Modal de confirmação
     modalOverlay: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: themes.colors.verdeClaro75, // Fundo escuro semi-transparente
+        backgroundColor: themes.colors.verdeClaro75, 
     },
 
     modalContent: {
-        width: '80%', // 80% da largura da tela
+        width: '80%',
         backgroundColor: themes.colors.branco8,
         borderRadius: 30,
         padding: 20,
         alignItems: 'center',
     },
 
-    // Texto de confirmação no modal
     confirmaCancelamento: {
         fontSize: 20,
         color: themes.colors.verdeEscuro,
         fontFamily: themes.fonts.main,
-        marginBottom: 20, // Espaço abaixo da mensagem
-        textAlign: 'center', // Centraliza o texto
+        marginBottom: 20, 
+        textAlign: 'center', 
     },
 
-    // Ícone de verificação no modal
     verificado: {
         width: 50,
         height: 50,
-        marginBottom: 20, // Espaço abaixo do ícone
+        marginBottom: 20, 
     },
 
-    // Botão de confirmação no modal
     modalButton: {
-        width: 60, // Ocupa toda a largura do modal
+        width: 60, 
         height: 60,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: themes.colors.branco8,
         borderRadius: 30,
-        marginTop: 120, // Espaço acima do botão
+        marginTop: 120, 
     },
 
-    // Texto dentro do botão de confirmação no modal
     confirma: {
         fontSize: 20,
         color: themes.colors.verdeEscuro,

@@ -2,14 +2,12 @@ import { StyleSheet } from 'react-native';
 import { themes } from '../../global/themes';
 
 export const style = StyleSheet.create({
-  // Container principal
   container: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: themes.colors.verdeClaro,
   },
 
-  // Cabeçalho
   boxTop: {
     width: '100%',
     alignItems: 'center',
@@ -17,7 +15,6 @@ export const style = StyleSheet.create({
     paddingTop: 50,
   },
 
-  // Logo
   logo: {
     width: 45,
     height: 45,
@@ -30,7 +27,6 @@ export const style = StyleSheet.create({
     top: 54, 
   },
 
-  // Calendário
   boxCalendar: {
     width: '100%',
     alignItems: 'center',
@@ -50,14 +46,12 @@ export const style = StyleSheet.create({
     elevation: 3,
   },
 
-  // Linha horizontal (meio)
   linhaMeio: {
     width: '90%',
     height: 1,
     backgroundColor: themes.colors.verdeEscuro,
   },
 
-  // Horários
   horariosContainer: {
     width: '100%',
     alignItems: 'center',
@@ -102,7 +96,6 @@ export const style = StyleSheet.create({
     color: themes.colors.branco8, 
   },
 
-  // Rodapé
   rodape: {
     position: 'absolute', 
     bottom: 50, 
@@ -151,7 +144,6 @@ export const style = StyleSheet.create({
     fontFamily: themes.fonts.main,
   },
 
-  // Modal de confirmação
   modalOverlay: {
     flex: 1,
     justifyContent: 'center',
@@ -198,7 +190,6 @@ export const style = StyleSheet.create({
   },
 });
 
-// Tema do calendário
 export const calendarTheme = {
   calendarBackground: "transparent",
   textSectionTitleColor: themes.colors.verdeEscuro5,
@@ -220,6 +211,5 @@ export const calendarTheme = {
   textDayHeaderFontFamily: themes.fonts.podkova,
   textDayFontSize: 17,
   textMonthFontSize: 20,
-  textDayHeaderFontSize: 15,
-  
+  textDayHeaderFontSize: 15, 
 };

@@ -35,7 +35,7 @@ export default function Agendamentos() {
   ];
 
   const handlePressIn = (message: string) => {
-    setHorarioSelecionado(message); // Define o horário selecionado
+    setHorarioSelecionado(message); 
     setPressionadoMessages((prev) => ({ ...prev, [message]: true }));
   };
 
@@ -59,7 +59,7 @@ export default function Agendamentos() {
             <Pressable
               style={({ pressed }) => [
                 style.buttonMessages,
-                horarioSelecionado === message && style.buttonMessagesSelected, // Aplica o estilo selecionado
+                horarioSelecionado === message && style.buttonMessagesSelected,
                 {
                   backgroundColor:
                     pressed || horarioSelecionado === message
@@ -74,7 +74,7 @@ export default function Agendamentos() {
                 <Text
                   style={[
                     style.textMsgAgendamentos,
-                    horarioSelecionado === message && style.textMsgAgendamentosSelected, // Aplica o estilo selecionado
+                    horarioSelecionado === message && style.textMsgAgendamentosSelected, 
                     {
                       color:
                         pressed || horarioSelecionado === message
@@ -151,16 +151,11 @@ export default function Agendamentos() {
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={style.modalOverlay}>
-          {/* Retângulo com a mensagem de cancelamento */}
           <View style={style.modalContent}>
-            {/* Mensagem de cancelamento */}
             <Text style={style.confirmaCancelamento}>{themes.strings.confirmaCancelamento}</Text>
 
-            {/* Ícone de verificação */}
             <Image source={Verificado} style={style.verificado} resizeMode="contain" />
           </View>
-
-          {/* Botão de confirmar (fora do retângulo) */}
           <Pressable
             style={({ pressed }) => [
               style.modalButton,

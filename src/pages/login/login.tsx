@@ -37,8 +37,7 @@ export default function Login() {
           onPressOut={() => setPressionadoGmail(false)}
           onPress={() => navigation.navigate('Menu')}
         >
-          {({ pressed }) => (
-            <>
+          {({ pressed }) => ( <>
               <Image
                 source={IconGmail}
                 style={{
@@ -76,8 +75,7 @@ export default function Login() {
           onPressOut={() => setPressionadoApple(false)}
           onPress={() => navigation.navigate('Menu')}
         >
-          {({ pressed }) => (
-            <>
+          {({ pressed }) => ( <>
               <Image
                 source={IconApple}
                 style={{

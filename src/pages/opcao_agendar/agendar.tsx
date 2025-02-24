@@ -30,7 +30,7 @@ export default function Agendar() {
   const [pressionadoConfirmar, setPressionadoConfirmar] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [pressionadoHorarios, setPressionadoHorarios] = useState<{ [key: string]: boolean }>({});
-  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null); // Estado para o horário selecionado
+  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null); 
   const [day, setDay] = useState<DateData>();
 
   const horarios: (keyof typeof themes.strings)[] = [
@@ -43,7 +43,7 @@ export default function Agendar() {
   ];
 
   const handlePressIn = (horario: string) => {
-    setHorarioSelecionado(horario); // Define o horário selecionado
+    setHorarioSelecionado(horario); 
     setPressionadoHorarios((prev) => ({ ...prev, [horario]: true }));
   };
 
@@ -85,7 +85,7 @@ export default function Agendar() {
               key={horario}
               style={({ pressed }) => [
                 style.buttonHorarios,
-                horarioSelecionado === horario && style.buttonHorariosSelected, // Aplica o estilo selecionado
+                horarioSelecionado === horario && style.buttonHorariosSelected, 
                 {
                   backgroundColor:
                     pressed || horarioSelecionado === horario
@@ -100,7 +100,7 @@ export default function Agendar() {
                 <Text
                   style={[
                     style.textMsgHorarios,
-                    horarioSelecionado === horario && style.textMsgHorariosSelected, // Aplica o estilo selecionado
+                    horarioSelecionado === horario && style.textMsgHorariosSelected, 
                     {
                       color:
                         pressed || horarioSelecionado === horario

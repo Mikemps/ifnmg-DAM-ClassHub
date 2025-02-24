@@ -89,8 +89,7 @@ export default function Menu() {
           onPressOut={() => setPressionadoLogout(false)}
           onPress={() => navigation.navigate('Login')}
         >
-          {({ pressed }) => (
-            <>
+          {({ pressed }) => ( <>
               <Image
                 source={IconLogout}
                 style={{
