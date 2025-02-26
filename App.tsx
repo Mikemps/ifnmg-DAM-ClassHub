@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import { ActivityIndicator, View } from 'react-native';
+import Routes from './src/routes/routes'; 
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    const [fontsLoaded] = useFonts({
+        'Jaro-Regular': require('./assets/fonts/Jaro-Regular.ttf'),
+        'Podkova-Regular': require('./assets/fonts/Podkova-Regular.ttf'),
+    });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    if (!fontsLoaded) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#A7EA9D" /> 
+            </View>
+        );
+    }
+    return <Routes/>;
+}
