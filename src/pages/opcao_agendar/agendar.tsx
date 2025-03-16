@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Image, Pressable, Modal } from "react-native";
+import { Text, View, Image, Pressable, Modal, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
@@ -11,6 +11,8 @@ import { ptBR } from "../../utils/localeCalendarConfig";
 
 import { themes } from "../../global/themes";
 import { style, calendarTheme } from "./styles";
+
+import { scheduleEvent } from "../../../services/calendlyService"; // Importação do serviço
 
 LocaleConfig.locales["pt-br"] = ptBR;
 LocaleConfig.defaultLocale = "pt-br";
@@ -30,7 +32,7 @@ export default function Agendar() {
   const [pressionadoConfirmar, setPressionadoConfirmar] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [pressionadoHorarios, setPressionadoHorarios] = useState<{ [key: string]: boolean }>({});
-  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null); 
+  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null);
   const [day, setDay] = useState<DateData>();
 
   const horarios: (keyof typeof themes.strings)[] = [
@@ -43,12 +45,37 @@ export default function Agendar() {
   ];
 
   const handlePressIn = (horario: string) => {
-    setHorarioSelecionado(horario); 
+    setHorarioSelecionado(horario);
     setPressionadoHorarios((prev) => ({ ...prev, [horario]: true }));
   };
 
   const handlePressOut = (horario: string) => {
     setPressionadoHorarios((prev) => ({ ...prev, [horario]: false }));
+  };
+
+  const handleAgendarEvento = async () => {
+    if (day && horarioSelecionado) {
+      try {
+        // Formatar a data e hora no formato ISO 8601
+        const dataHora = `${day.dateString}T${horarioSelecionado}:00Z`;
+
+        // Chamar a função de agendamento
+        const response = await scheduleEvent(
+          "https://calendly.com/event_types/user/me", // Substitua pela URI do tipo de evento
+          "mikeps.dev@gmail.com", // Substitua pelo email do convidado
+          dataHora
+        );
+
+        console.log("Evento agendado:", response);
+        setModalVisible(false); // Fechar o modal
+        Alert.alert("Sucesso", "Evento agendado com sucesso!");
+      } catch (error) {
+        console.error("Erro ao agendar evento:", error);
+        Alert.alert("Erro", "Erro ao agendar evento. Tente novamente.");
+      }
+    } else {
+      Alert.alert("Atenção", "Selecione uma data e um horário.");
+    }
   };
 
   return (
@@ -85,7 +112,7 @@ export default function Agendar() {
               key={horario}
               style={({ pressed }) => [
                 style.buttonHorarios,
-                horarioSelecionado === horario && style.buttonHorariosSelected, 
+                horarioSelecionado === horario && style.buttonHorariosSelected,
                 {
                   backgroundColor:
                     pressed || horarioSelecionado === horario
@@ -100,7 +127,7 @@ export default function Agendar() {
                 <Text
                   style={[
                     style.textMsgHorarios,
-                    horarioSelecionado === horario && style.textMsgHorariosSelected, 
+                    horarioSelecionado === horario && style.textMsgHorariosSelected,
                     {
                       color:
                         pressed || horarioSelecionado === horario
@@ -191,7 +218,7 @@ export default function Agendar() {
             ]}
             onPressIn={() => setPressionadoConfirmar(true)}
             onPressOut={() => setPressionadoConfirmar(false)}
-            onPress={() => setModalVisible(false)}
+            onPress={handleAgendarEvento} // Chamar a função de agendamento
           >
             {({ pressed }) => (
               <Text

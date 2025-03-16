@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Text, View, Image, Modal, Pressable, ScrollView } from "react-native";
+import { Text, View, Image, Modal, Pressable, ScrollView, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
 
 import { themes } from "../../global/themes";
 import { style } from "./styles";
+
+import { cancelEvent } from "../../../services/calendlyService"; // Importação do serviço
 
 import Logo from "../../../assets/logo.png";
 import Linha from "../../../assets/Line.png";
@@ -18,29 +20,27 @@ export default function Agendamentos() {
   const [pressionadoCancelar, setPressionadoCancelar] = useState<boolean>(false);
   const [pressionadoVoltar, setPressionadoVoltar] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [pressionadoMessages, setPressionadoMessages] = useState<{ [key: string]: boolean }>({});
   const [pressionadoConfirmar, setPressionadoConfirmar] = useState<boolean>(false);
-  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null); // Estado para o horário selecionado
+  const [eventoSelecionado, setEventoSelecionado] = useState<string | null>(null);
 
-  // Define o tipo de `messages` como as chaves válidas de `themes.strings`
-  const messages: (keyof typeof themes.strings)[] = [
-    "message1",
-    "message2",
-    "message3",
-    "message4",
-    "message5",
-    "message6",
-    "message7",
-    "message8",
-  ];
+  // Função para cancelar um evento
+  const handleCancelarEvento = async () => {
+    if (!eventoSelecionado) {
+      Alert.alert("Atenção", "Nenhum evento selecionado para cancelar.");
+      return;
+    }
 
-  const handlePressIn = (message: string) => {
-    setHorarioSelecionado(message); 
-    setPressionadoMessages((prev) => ({ ...prev, [message]: true }));
-  };
+    try {
+      const response = await cancelEvent(eventoSelecionado);
+      console.log("Evento cancelado:", response);
 
-  const handlePressOut = (message: string) => {
-    setPressionadoMessages((prev) => ({ ...prev, [message]: false }));
+      // Fechar o modal e fornecer feedback ao usuário
+      setModalVisible(false);
+      Alert.alert("Sucesso", "Evento cancelado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao cancelar evento:", error);
+      Alert.alert("Erro", "Erro ao cancelar evento. Tente novamente.");
+    }
   };
 
   return (
@@ -52,43 +52,10 @@ export default function Agendamentos() {
         <Image source={Linha} style={style.linhaCima} resizeMode="contain" />
       </View>
 
-      {/* Lista de horários */}
+      {/* Lista de eventos */}
       <ScrollView contentContainerStyle={style.horariosContainer}>
-        {messages.map((message) => (
-          <View key={message} style={style.boxButtonMessages}>
-            <Pressable
-              style={({ pressed }) => [
-                style.buttonMessages,
-                horarioSelecionado === message && style.buttonMessagesSelected,
-                {
-                  backgroundColor:
-                    pressed || horarioSelecionado === message
-                      ? themes.colors.verdeEscuro
-                      : themes.colors.branco5,
-                },
-              ]}
-              onPressIn={() => handlePressIn(message)}
-              onPressOut={() => handlePressOut(message)}
-            >
-              {({ pressed }) => (
-                <Text
-                  style={[
-                    style.textMsgAgendamentos,
-                    horarioSelecionado === message && style.textMsgAgendamentosSelected, 
-                    {
-                      color:
-                        pressed || horarioSelecionado === message
-                          ? themes.colors.branco8
-                          : themes.colors.verdeEscuro,
-                    },
-                  ]}
-                >
-                  {themes.strings[message]}
-                </Text>
-              )}
-            </Pressable>
-          </View>
-        ))}
+        {/* Aqui você pode listar os eventos reais obtidos da API do Calendly */}
+        <Text style={style.textMsgAgendamentos}>Nenhum evento agendado.</Text>
       </ScrollView>
 
       {/* Rodapé */}
@@ -165,7 +132,7 @@ export default function Agendamentos() {
             ]}
             onPressIn={() => setPressionadoConfirmar(true)}
             onPressOut={() => setPressionadoConfirmar(false)}
-            onPress={() => setModalVisible(false)}
+            onPress={handleCancelarEvento} // Chamar a função de cancelamento
           >
             {({ pressed }) => (
               <Text
