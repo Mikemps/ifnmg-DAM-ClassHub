@@ -4,4 +4,4 @@ export type RootStackParamList = {
     Menu: undefined;
     Agendar: undefined;
     Agendamentos: undefined;
-  };
+};

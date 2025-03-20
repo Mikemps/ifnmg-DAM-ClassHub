@@ -1,4 +1,14 @@
 import { StyleSheet } from 'react-native';
+<<<<<<< Updated upstream
+import { themes } from '../../global/themes'; 
+
+export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: themes.colors.verdeClaro,
+    }
+})
+=======
 import { themes } from '../../global/themes';
 
 export const style = StyleSheet.create({
@@ -22,7 +32,7 @@ export const style = StyleSheet.create({
 
   linhaCima: {
     width: '90%',
-    height: 1.1,
+    height: 1,
     backgroundColor: themes.colors.verdeEscuro,
     top: 54, 
   },
@@ -33,17 +43,23 @@ export const style = StyleSheet.create({
   },
 
   calendar: {
-    width: 370,
+    width: 400,
   },
 
   arrowContainer: {
-    backgroundColor: themes.colors.branco8, 
+    backgroundColor: themes.colors.branco, 
     borderRadius: 15, 
     width: 40, 
     height: 40, 
     justifyContent: 'center', 
     alignItems: 'center', 
-    elevation: 3,
+    elevation: 4,
+  },
+
+  horariosContainer: {
+    width: '100%',
+    alignItems: 'center',
+    top: 10
   },
 
   linhaMeio: {
@@ -52,16 +68,11 @@ export const style = StyleSheet.create({
     backgroundColor: themes.colors.verdeEscuro,
   },
 
-  horariosContainer: {
-    width: '100%',
-    alignItems: 'center',
-  },
-
   horariosTitle: {
-    fontSize: 24,
+    fontSize: themes.font_size.g,
     fontWeight: '400',
     color: themes.colors.verdeEscuro,
-    fontFamily: themes.fonts.main,
+    fontFamily: themes.fonts.jaro,
     marginTop: 25,
   },
 
@@ -84,8 +95,8 @@ export const style = StyleSheet.create({
   },
 
   textMsgHorarios: {
-    fontSize: 20,
-    fontFamily: themes.fonts.main,
+    fontSize: themes.font_size.m,
+    fontFamily: themes.fonts.jaro,
   },
 
   buttonHorariosSelected: {
@@ -93,7 +104,7 @@ export const style = StyleSheet.create({
   },
 
   textMsgHorariosSelected: {
-    color: themes.colors.branco8, 
+    color: themes.colors.branco, 
   },
 
   rodape: {
@@ -117,7 +128,7 @@ export const style = StyleSheet.create({
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: themes.colors.branco8,
+    backgroundColor: themes.colors.branco,
     borderRadius: 30,
     marginRight: 10,
     elevation: 4,
@@ -133,15 +144,15 @@ export const style = StyleSheet.create({
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: themes.colors.branco8,
+    backgroundColor: themes.colors.branco,
     borderRadius: 30,
     elevation: 4,
   },
 
   agendarText: {
-    fontSize: 20,
+    fontSize: themes.font_size.m,
     color: themes.colors.verdeEscuro,
-    fontFamily: themes.fonts.main,
+    fontFamily: themes.fonts.jaro,
   },
 
   modalOverlay: {
@@ -153,16 +164,16 @@ export const style = StyleSheet.create({
 
   modalContent: {
     width: '80%',
-    backgroundColor: themes.colors.branco8,
+    backgroundColor: themes.colors.branco,
     borderRadius: 30,
     padding: 20,
     alignItems: 'center',
   },
 
   confirmaAgendamento: {
-    fontSize: 20,
+    fontSize: themes.font_size.m,
     color: themes.colors.verdeEscuro,
-    fontFamily: themes.fonts.main,
+    fontFamily: themes.fonts.jaro,
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -178,15 +189,15 @@ export const style = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: themes.colors.branco8,
+    backgroundColor: themes.colors.branco,
     borderRadius: 30,
     marginTop: 120, 
   },
 
   confirma: {
-    fontSize: 20,
+    fontSize: themes.font_size.m,
     color: themes.colors.verdeEscuro,
-    fontFamily: themes.fonts.main,
+    fontFamily: themes.fonts.jaro,
   },
 });
 
@@ -194,7 +205,7 @@ export const calendarTheme = {
   calendarBackground: "transparent",
   textSectionTitleColor: themes.colors.verdeEscuro5,
   selectedDayBackgroundColor: themes.colors.verdeEscuro,
-  selectedDayTextColor: themes.colors.branco8,
+  selectedDayTextColor: themes.colors.branco,
   todayTextColor: themes.colors.verdeEscuro,
   dayTextColor: themes.colors.verdeEscuro,
   arrowColor: themes.colors.verdeEscuro,
@@ -207,9 +218,10 @@ export const calendarTheme = {
     padding: 0,
   },
   textDayFontFamily: themes.fonts.podkova,
-  textMonthFontFamily: themes.fonts.main,
+  textMonthFontFamily: themes.fonts.jaro,
   textDayHeaderFontFamily: themes.fonts.podkova,
   textDayFontSize: 17,
-  textMonthFontSize: 20,
+  textMonthFontSize: themes.font_size.m,
   textDayHeaderFontSize: 15, 
 };
+>>>>>>> Stashed changes

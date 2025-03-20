@@ -1,103 +1,83 @@
-import { Dimensions, StyleSheet } from "react-native";
-import { themes } from "../../global/themes"; 
+<<<<<<< Updated upstream
+import { StyleSheet } from 'react-native';
+import { themes } from '../../global/themes'; 
+
+export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: themes.colors.verdeClaro,
+    }
+})
+=======
+import { StyleSheet } from "react-native";
+import { themes } from "../../global/themes";
 
 export const style = StyleSheet.create({
-    container:{
-        flex: 1,
-        alignItems:`center`, 
-        justifyContent:`center`,
-        backgroundColor: themes.colors.verdeClaro,
-        gap: 25,
-    },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: themes.colors.verdeClaro,
+    gap: 25,
+  },
 
-    boxTop:{
-        width: `100%`,
-        alignItems:`center`, 
-        justifyContent:`center`
-    },
+  boxTop: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
-    boxBotton1:{
-        width: `100%`,
-        alignItems: `center`,
-        justifyContent: `center`
-    },
+  boxBotton: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
-    boxBotton2:{
-        width: `100%`,
-        alignItems: `center`,
-        justifyContent: `center`
-    },
+  logo: {
+    width: 100,
+    height: 100,
+  },
 
-    boxBotton3:{
-        width: `100%`,
-        alignItems: `center`,
-        justifyContent: `center`
-    },
+  button: {
+    width: 237,
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    elevation: 4,
+  },
 
-    logo:{
-        width: 100,
-        height: 100,
-    },
+  button3: {
+    width: 163,
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    borderRadius: 30,
+    gap: 10,
+    elevation: 4,
+    top: 200
+  },
 
-    button1: {
-        width: 237,
-        height: 45, 
-        alignItems: `center`,
-        justifyContent: `center`,
-        flexDirection: "row",
-        borderRadius: 30,
-        elevation: 4,
-    },
+  textAgendar: {
+    fontSize: themes.font_size.m,
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
+  },
 
-    button2: {
-        width: 237,
-        height: 45, 
-        alignItems: `center`,
-        justifyContent: `center`,
-        flexDirection: "row", 
-        borderRadius: 30,
-        elevation: 4,
-    },
+  textAgendamentos: {
+    fontSize: themes.font_size.m,
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
+  },
 
-    button3: {
-        width: 163,
-        height: 45, 
-        alignItems: `center`,
-        justifyContent: `center`,
-        flexDirection: "row", 
-        borderRadius: 30,
-        paddingHorizontal: 10,
-        gap: 5,
-        elevation: 4,
-        top: 190,
-    },
+  textLogout: {
+    fontSize: themes.font_size.m,
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
+  },
 
-    textAgendar:{
-        fontSize: 20,
-        width: 141,
-        height: 25,
-        fontWeight: 400,
-        color: themes.colors.verdeEscuro,
-        fontFamily: themes.fonts.main,
-        paddingLeft: 3
-    },
-
-    textAgendamentos:{
-        fontSize: 20,
-        width: 141,
-        height: 25,
-        fontWeight: 400,
-        color: themes.colors.verdeEscuro,
-        fontFamily: themes.fonts.main,
-        paddingLeft: 10,
-    },
-
-    textLogout:{
-        fontSize: 20,
-        width: 56,
-        height: 25,
-        fontWeight: 400,
-        color: themes.colors.verdeEscuro,
-        fontFamily: themes.fonts.main
-    },
-}); 
+  icon: {
+    width: 24,
+    height: 24,
+  },
+});
+>>>>>>> Stashed changes

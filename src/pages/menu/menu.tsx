@@ -1,113 +1,71 @@
+<<<<<<< Updated upstream
 import React, { useState } from "react";
-import { Text, View, Image, Pressable } from "react-native";
+import { View } from "react-native";
+
+import { themes } from "../../global/themes";
+import { styles } from "./styles"
+=======
+import React from "react";
+import { View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
 
 import { themes } from "../../global/themes";
+import { icons } from "../../global/icons";
 import { style } from "./styles";
 
-import Logo from "../../../assets/logo.png";
-import IconLogout from "../../../assets/iconLogout.png";
+import { Button } from "../../components/button/button"; 
+>>>>>>> Stashed changes
 
 export default function Menu() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  
+    return (
+        <View style={styles.container}>
 
-  const [pressionadoAgendar, setPressionadoAgendar] = useState<boolean>(false);
-  const [pressionadoAgendamento, setPressionadoAgendamento] = useState<boolean>(false);
-  const [pressionadoLogout, setPressionadoLogout] = useState<boolean>(false);
-
+<<<<<<< Updated upstream
+        </View>
+    );
+=======
   return (
     <View style={style.container}>
       {/* Cabeçalho */}
       <View style={style.boxTop}>
-        <Image source={Logo} style={style.logo} resizeMode="contain" />
+        <Image source={icons.logo} style={style.logo} resizeMode="contain" />
       </View>
 
       {/* Botão Agendar */}
-      <View style={style.boxBotton1}>
-        <Pressable
-          style={({ pressed }) => [
-            style.button1,
-            {
-              backgroundColor: pressed ? themes.colors.verdeEscuro : themes.colors.branco8,
-            },
-          ]}
-          onPressIn={() => setPressionadoAgendar(true)}
-          onPressOut={() => setPressionadoAgendar(false)}
-          onPress={() => navigation.navigate('Agendar')}
-        >
-          {({ pressed }) => (
-            <Text
-              style={[
-                style.textAgendar,
-                { color: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro },
-              ]}
-            >
-              {themes.strings.textAgendar}
-            </Text>
-          )}
-        </Pressable>
+      <View style={style.boxBotton}>
+        <Button
+          buttonText={themes.strings.agendar}
+          buttonStyle={style.button}
+          textStyle={style.textAgendar}
+          onPress={() => navigation.navigate("Agendar")}
+        />
       </View>
 
       {/* Botão Agendamentos */}
-      <View style={style.boxBotton2}>
-        <Pressable
-          style={({ pressed }) => [
-            style.button2,
-            {
-              backgroundColor: pressed ? themes.colors.verdeEscuro : themes.colors.branco8,
-            },
-          ]}
-          onPressIn={() => setPressionadoAgendamento(true)}
-          onPressOut={() => setPressionadoAgendamento(false)}
-          onPress={() => navigation.navigate('Agendamentos')}
-        >
-          {({ pressed }) => (
-            <Text
-              style={[
-                style.textAgendamentos,
-                { color: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro },
-              ]}
-            >
-              {themes.strings.textAgendamentos}
-            </Text>
-          )}
-        </Pressable>
+      <View style={style.boxBotton}>
+        <Button
+          buttonText={themes.strings.agendamentos}
+          buttonStyle={style.button}
+          textStyle={style.textAgendamentos}
+          onPress={() => navigation.navigate("Agendamentos")}
+        />
       </View>
 
       {/* Botão Logout */}
-      <View style={style.boxBotton3}>
-        <Pressable
-          style={({ pressed }) => [
-            style.button3,
-            {
-              backgroundColor: pressed ? themes.colors.verdeEscuro : themes.colors.branco8,
-            },
-          ]}
-          onPressIn={() => setPressionadoLogout(true)}
-          onPressOut={() => setPressionadoLogout(false)}
-          onPress={() => navigation.navigate('Login')}
-        >
-          {({ pressed }) => ( <>
-              <Image
-                source={IconLogout}
-                style={{tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
-                }}
-                resizeMode="contain"
-              />
-              <Text
-                style={[
-                  style.textLogout,
-                  { color: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro },
-                ]}
-              >
-                {themes.strings.textLogout}
-              </Text>
-            </>
-          )}
-        </Pressable>
+      <View style={style.boxBotton}>
+        <Button
+          iconSource={icons.logout}
+          buttonText={themes.strings.logout}
+          buttonStyle={style.button3}
+          textStyle={style.textLogout}
+          iconStyle={style.icon}
+          onPress={() => navigation.navigate("Login")}
+        />
       </View>
     </View>
   );
+>>>>>>> Stashed changes
 }

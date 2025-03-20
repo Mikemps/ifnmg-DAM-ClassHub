@@ -1,94 +1,63 @@
+<<<<<<< Updated upstream
 import React, { useState } from "react";
-import { Text, View, Image, Pressable } from "react-native";
+import { View } from "react-native";
+
+import { themes } from "../../global/themes";
+import { styles } from "./styles";
+
+=======
+import React from "react";
+import { View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
 
 import { themes } from "../../global/themes";
+import { icons } from "../../global/icons";
 import { style } from "./styles";
 
-import Logo from "../../../assets/logo.png";
-import IconApple from "../../../assets/Apple.png";
-import IconGmail from "../../../assets/logos_google-gmail.png";
-
+import { Button } from "../../components/button/button"; 
+>>>>>>> Stashed changes
 export default function Login() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  
+    return (
+        <View style={styles.container}>
 
-  const [pressionadoGmail, setPressionadoGmail] = useState<boolean>(false);
-  const [pressionadoApple, setPressionadoApple] = useState<boolean>(false);
-
+<<<<<<< Updated upstream
+        </View>
+    );
+=======
   return (
     <View style={style.container}>
       {/* Cabeçalho */}
       <View style={style.boxTop}>
-        <Image source={Logo} style={style.logo} resizeMode="contain" />
+        <Image source={icons.logo} style={style.logo} resizeMode="contain" />
       </View>
 
       {/* Botão Gmail */}
-      <View style={style.boxBotton1}>
-        <Pressable
-          style={({ pressed }) => [
-            style.button1,
-            {
-              backgroundColor: pressed ? themes.colors.verdeEscuro : themes.colors.branco8,
-            },
-          ]}
-          onPressIn={() => setPressionadoGmail(true)}
-          onPressOut={() => setPressionadoGmail(false)}
-          onPress={() => navigation.navigate('Menu')}
-        >
-          {({ pressed }) => ( <>
-              <Image
-                source={IconGmail}
-                style={{tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
-                }}
-                resizeMode="contain"
-              />
-              <Text
-                style={[
-                  style.textGmail,
-                  { color: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro },
-                ]}
-              >
-                {themes.strings.textGmail}
-              </Text>
-            </>
-          )}
-        </Pressable>
+      <View style={style.boxBotton}>
+        <Button
+          iconSource={icons.gmail}
+          buttonText={themes.strings.gmail}
+          buttonStyle={style.button1}
+          textStyle={style.textGmail}
+          iconStyle={style.icon}
+          onPress={() => navigation.navigate("Menu")}
+        />
       </View>
 
       {/* Botão Apple */}
-      <View style={style.boxBotton2}>
-        <Pressable
-          style={({ pressed }) => [
-            style.button2,
-            {
-              backgroundColor: pressed ? themes.colors.verdeEscuro : themes.colors.branco8,
-            },
-          ]}
-          onPressIn={() => setPressionadoApple(true)}
-          onPressOut={() => setPressionadoApple(false)}
-          onPress={() => navigation.navigate('Menu')}
-        >
-          {({ pressed }) => ( <>
-              <Image
-                source={IconApple}
-                style={{tintColor: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro,
-                }}
-                resizeMode="contain"
-              />
-              <Text
-                style={[
-                  style.textAppleID,
-                  { color: pressed ? themes.colors.branco8 : themes.colors.verdeEscuro },
-                ]}
-              >
-                {themes.strings.textAppleID}
-              </Text>
-            </>
-          )}
-        </Pressable>
+      <View style={style.boxBotton}>
+        <Button
+          iconSource={icons.apple}
+          buttonText={themes.strings.appleID}
+          buttonStyle={style.button2}
+          textStyle={style.textAppleID}
+          iconStyle={style.icon}
+          onPress={() => navigation.navigate("Menu")}
+        />
       </View>
     </View>
   );
+>>>>>>> Stashed changes
 }
