@@ -5,9 +5,14 @@ import { RootStackParamList } from "../@types/types";
 import Splash from "../pages/splash/splash"; 
 import Login from "../pages/login/login"; 
 import Menu from "../pages/menu/menu";
+<<<<<<< Updated upstream
 import Agendamentos from "../pages/agendar/agendar"; 
 import Agendar from "../pages/agendamentos/agendamentos";
 
+=======
+import Agendamentos from "../pages/agendamentos/agendamentos"; 
+import Agendar from "../pages/agendar/agendar";
+>>>>>>> Stashed changes
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>(); 
