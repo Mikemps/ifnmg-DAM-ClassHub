@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-=======
-import { ok } from "assert";
-
->>>>>>> Stashed changes
 export const themes = {
     colors:{
         verdeEscuro: "rgb(0, 53, 14)",
@@ -17,16 +12,8 @@ export const themes = {
         jaro: 'Jaro-Regular',
         podkova: 'Podkova-Regular',
     },
-<<<<<<< Updated upstream
-    
-    strings: {
-        gmail: "Entrar com Gmail",
-        appleID: "Entrar com Apple ID", 
-
-=======
-
     font_size:{
-        p: 18,
+        p: 17,
         m: 20,
         g: 24,
     },
@@ -35,7 +22,6 @@ export const themes = {
         gmail: "Entrar com Gmail",
         appleID: "Entrar com Apple ID", 
 
->>>>>>> Stashed changes
         agendarHora: "Agendar Horário", 
         agendamentos: "Agendamentos", 
         logout: "Logout", 
@@ -46,11 +32,7 @@ export const themes = {
         agendCancelado: "Agendamento cancelado\ncom sucesso.",
         agendEfetuado: "Agendamento efetuado\ncom sucesso.",
         confirmar: "Ok",
-<<<<<<< Updated upstream
-        
-        textHorarios: "Horários", 
-=======
-        
+                
         textHorarios: "Horários", 
 
         message1: "30 de Janeiro de 2025                              09:00h",
@@ -68,7 +50,6 @@ export const themes = {
         horario4: "13:30",
         horario5: "15:00", 
         horario6: "16:30",
->>>>>>> Stashed changes
     },
 
     data:{
@@ -92,5 +73,5 @@ export const themes = {
         qui: "Qui", 
         sex: "Sex",
         sab: "Sáb",
-    }
+    },
 }

@@ -1,18 +1,4 @@
 import React, { useState } from "react";
-<<<<<<< Updated upstream
-import { View } from "react-native";
-
-import { themes } from "../../global/themes";
-import { styles } from "./styles";
-
-export default function Agendar() {
-  
-    return (
-        <View style={styles.container}>
-
-        </View>
-    );
-=======
 import { Text, View, Image, Modal, ScrollView, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -168,5 +154,4 @@ export default function Agendar() {
       </Modal>
     </View>
   );
->>>>>>> Stashed changes
 }

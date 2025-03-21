@@ -1,10 +1,3 @@
-<<<<<<< Updated upstream
-import React, { useState } from "react";
-import { View } from "react-native";
-
-import { themes } from "../../global/themes";
-import { styles } from "./styles"
-=======
 import React from "react";
 import { View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -15,18 +8,11 @@ import { themes } from "../../global/themes";
 import { icons } from "../../global/icons";
 import { style } from "./styles";
 
-import { Button } from "../../components/button/button"; 
->>>>>>> Stashed changes
+import { Button } from "../../components/button/button";
 
 export default function Menu() {
-  
-    return (
-        <View style={styles.container}>
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-<<<<<<< Updated upstream
-        </View>
-    );
-=======
   return (
     <View style={style.container}>
       {/* Cabeçalho */}
@@ -67,5 +53,4 @@ export default function Menu() {
       </View>
     </View>
   );
->>>>>>> Stashed changes
 }

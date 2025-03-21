@@ -1,9 +1,15 @@
-import { StyleSheet } from 'react-native';
-import { themes } from '../../global/themes'; 
+import { StyleSheet } from "react-native";
+import { themes } from "../../global/themes";
 
-export const styles = StyleSheet.create({
+export const style = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: themes.colors.verdeClaro,
-    }
-})
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: themes.colors.verdeClaro, 
+    },
+    splashImage: {
+        width: 200, 
+        height: 200, 
+    },
+});

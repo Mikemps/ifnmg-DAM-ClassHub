@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Image, Pressable, PressableProps, StyleProp, ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { Text, Image, Pressable, PressableProps, StyleProp, ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { themes } from "../../global/themes";
 
 interface ButtonProps extends PressableProps {

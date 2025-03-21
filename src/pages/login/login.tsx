@@ -1,11 +1,3 @@
-<<<<<<< Updated upstream
-import React, { useState } from "react";
-import { View } from "react-native";
-
-import { themes } from "../../global/themes";
-import { styles } from "./styles";
-
-=======
 import React from "react";
 import { View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -17,16 +9,10 @@ import { icons } from "../../global/icons";
 import { style } from "./styles";
 
 import { Button } from "../../components/button/button"; 
->>>>>>> Stashed changes
-export default function Login() {
-  
-    return (
-        <View style={styles.container}>
 
-<<<<<<< Updated upstream
-        </View>
-    );
-=======
+export default function Login() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
     <View style={style.container}>
       {/* Cabeçalho */}
@@ -59,5 +45,4 @@ export default function Login() {
       </View>
     </View>
   );
->>>>>>> Stashed changes
 }

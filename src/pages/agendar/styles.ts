@@ -1,14 +1,4 @@
 import { StyleSheet } from 'react-native';
-<<<<<<< Updated upstream
-import { themes } from '../../global/themes'; 
-
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: themes.colors.verdeClaro,
-    }
-})
-=======
 import { themes } from '../../global/themes';
 
 export const style = StyleSheet.create({
@@ -56,16 +46,16 @@ export const style = StyleSheet.create({
     elevation: 4,
   },
 
-  horariosContainer: {
-    width: '100%',
-    alignItems: 'center',
-    top: 10
-  },
-
   linhaMeio: {
     width: '90%',
     height: 1,
     backgroundColor: themes.colors.verdeEscuro,
+  },
+
+  horariosContainer: {
+    width: '100%',
+    alignItems: 'center',
+    top: 10
   },
 
   horariosTitle: {
@@ -73,7 +63,7 @@ export const style = StyleSheet.create({
     fontWeight: '400',
     color: themes.colors.verdeEscuro,
     fontFamily: themes.fonts.jaro,
-    marginTop: 25,
+    marginTop: 15,
   },
 
   horariosGrid: {
@@ -220,8 +210,7 @@ export const calendarTheme = {
   textDayFontFamily: themes.fonts.podkova,
   textMonthFontFamily: themes.fonts.jaro,
   textDayHeaderFontFamily: themes.fonts.podkova,
-  textDayFontSize: 17,
+  textDayFontSize: themes.font_size.p,
   textMonthFontSize: themes.font_size.m,
   textDayHeaderFontSize: 15, 
 };
->>>>>>> Stashed changes

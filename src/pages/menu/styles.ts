@@ -1,14 +1,3 @@
-<<<<<<< Updated upstream
-import { StyleSheet } from 'react-native';
-import { themes } from '../../global/themes'; 
-
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: themes.colors.verdeClaro,
-    }
-})
-=======
 import { StyleSheet } from "react-native";
 import { themes } from "../../global/themes";
 
@@ -80,4 +69,3 @@ export const style = StyleSheet.create({
     height: 24,
   },
 });
->>>>>>> Stashed changes
