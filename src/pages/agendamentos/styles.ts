@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { themes } from '../../global/themes'; 
+import { themes } from '../../global/themes';
 
 export const style = StyleSheet.create({
   container: {
@@ -12,13 +12,13 @@ export const style = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 50, 
+    paddingTop: 50,
   },
 
   logo: {
     width: 45,
     height: 45,
-    marginBottom: 15, 
+    marginBottom: 15,
   },
 
   textAgendamentos: {
@@ -30,31 +30,31 @@ export const style = StyleSheet.create({
 
   linhaCima: {
     width: '90%',
-    height: 1, 
-    backgroundColor: themes.colors.verdeEscuro, 
-    marginTop: 10, 
-    marginBottom: 10, 
+    height: 1,
+    backgroundColor: themes.colors.verdeEscuro,
+    marginTop: 10,
+    marginBottom: 10,
   },
 
   boxButtonMessages: {
-    width: '90%', 
-    marginBottom: 10, 
-    alignSelf: 'center', 
+    width: '90%',
+    marginBottom: 10,
+    alignSelf: 'center',
   },
 
   buttonMessages: {
-    width: '100%', 
+    width: '100%',
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   buttonMessagesSelected: {
-    backgroundColor: themes.colors.verdeEscuro, 
+    backgroundColor: themes.colors.verdeEscuro,
   },
-    
+
   textMsgAgendamentosSelected: {
-    color: themes.colors.branco, 
+    color: themes.colors.branco,
   },
 
   textMsgAgendamentos: {
@@ -69,16 +69,16 @@ export const style = StyleSheet.create({
   },
 
   linhaBaixo: {
-    width: '90%', 
-    height: 1, 
-    backgroundColor: themes.colors.verdeEscuro, 
-    marginTop: 20, 
+    width: '90%',
+    height: 1,
+    backgroundColor: themes.colors.verdeEscuro,
+    marginTop: 20,
   },
 
   rodape: {
     width: '100%',
     alignItems: 'center',
-    paddingBottom: 55, 
+    paddingBottom: 55,
   },
 
   buttonVoltar: {
@@ -86,9 +86,9 @@ export const style = StyleSheet.create({
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 30, 
-    marginRight: 10, 
-    elevation: 4, 
+    borderRadius: 30,
+    marginRight: 10,
+    elevation: 4,
   },
 
   Voltar: {
@@ -97,12 +97,12 @@ export const style = StyleSheet.create({
   },
 
   buttonCancelar: {
-    width: 279, 
+    width: 279,
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: themes.colors.branco,
-    borderRadius: 30, 
+    borderRadius: 30,
     elevation: 4,
   },
 
@@ -116,7 +116,7 @@ export const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: themes.colors.verdeClaro75, 
+    backgroundColor: themes.colors.verdeClaro75,
   },
 
   modalContent: {
@@ -130,23 +130,23 @@ export const style = StyleSheet.create({
   confirmaCancelamento: {
     fontSize: themes.font_size.m,
     fontFamily: themes.fonts.jaro,
-    marginBottom: 20, 
-    textAlign: 'center', 
+    marginBottom: 20,
+    textAlign: 'center',
   },
 
   verificado: {
     width: 50,
     height: 50,
-    marginBottom: 20, 
+    marginBottom: 20,
   },
 
   modalButton: {
-    width: 60, 
+    width: 60,
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,
-    marginTop: 120, 
+    marginTop: 120,
   },
 
   confirma: {
@@ -154,50 +154,61 @@ export const style = StyleSheet.create({
     fontFamily: themes.fonts.jaro,
   },
 
-    eventItem: {
-      padding: 15,
-      width: 300,
-      borderBottomWidth: 1,
-      backgroundColor: themes.colors.branco, // Cor de fundo dos botões
-      borderRadius: 10, // Bordas arredondadas
-      marginVertical: 5, // Espaçamento vertical entre os botões
+  // Estilos para os agendamentos
+  eventosList: {
+    width: '90%',
+    alignSelf: 'center',
+    paddingVertical: 10,
   },
-  eventName: {
-      fontSize: 20,
-      textAlign: 'center',
-      color: themes.colors.verdeEscuro, // Cor do texto
-      fontFamily: themes.fonts.jaro, // Fonte
+
+  eventoContainer: {
+    width: '95%',
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: themes.colors.branco5, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
   },
-  eventInfo: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: 5,
+
+  eventoSelecionado: {
+    backgroundColor: themes.colors.verdeEscuro,
   },
-  eventDate: {
-      fontSize: 20,
-      color: themes.colors.verdeEscuro, // Cor do texto
-      fontFamily: themes.fonts.jaro, // Fonte
+
+  eventoContent: {
+    flex: 1, 
   },
-  eventTime: {
-      fontSize: 20,
-      color: themes.colors.verdeEscuro, // Cor do texto
-      fontFamily: themes.fonts.jaro, // Fonte
-      textAlign: 'right',
+
+  eventoDate: {
+    fontSize: themes.font_size.m,
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
   },
+
+  eventoTime: {
+    fontSize: themes.font_size.m,
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
+    textAlign: 'right',
+  },
+
   loadingText: {
-      fontSize: 16,
-      textAlign: 'center',
-      marginTop: 20,
+    fontSize: themes.font_size.m,
+    textAlign: 'center',
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
   },
+
   errorText: {
-      fontSize: 16,
-      textAlign: 'center',
-      marginTop: 20,
-      color: 'red',
+    fontSize: themes.font_size.m,
+    textAlign: 'center',
+    fontFamily: themes.fonts.jaro,
   },
+
   noEventsText: {
-      fontSize: 16,
-      textAlign: 'center',
-      marginTop: 20,
-  }
+    fontSize: themes.font_size.m,
+    textAlign: 'center',
+    color: themes.colors.verdeEscuro,
+    fontFamily: themes.fonts.jaro,
+  },
 });

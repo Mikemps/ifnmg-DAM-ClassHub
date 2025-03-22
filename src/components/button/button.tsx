@@ -8,7 +8,7 @@ interface ButtonProps extends PressableProps {
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
-  isSelected?: boolean; // Nova propriedade para controlar o estado de seleção
+  isSelected?: boolean; 
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -17,39 +17,68 @@ export const Button: React.FC<ButtonProps> = ({
   buttonStyle,
   textStyle,
   iconStyle,
-  isSelected = false, // Valor padrão é false
+  isSelected,
   ...props
 }) => {
   return (
     <Pressable
-      style={[
+      style={({ pressed }) => [
         buttonStyle,
         {
-          backgroundColor: isSelected ? themes.colors.verdeEscuro : themes.colors.branco, // Cor de fundo baseada no estado de seleção
+          backgroundColor:
+            isSelected !== undefined 
+              ? isSelected
+                ? themes.colors.verdeEscuro 
+                : themes.colors.branco 
+              : pressed 
+              ? themes.colors.verdeEscuro 
+              : themes.colors.branco, 
         },
       ]}
       {...props}
     >
-      {iconSource && (
-        <Image
-          source={iconSource}
-          style={[
-            iconStyle,
-            { tintColor: isSelected ? themes.colors.branco : themes.colors.verdeEscuro }, // Cor do ícone baseada no estado de seleção
-          ]}
-          resizeMode="contain"
-          testID="button-icon"
-        />
-      )}
-      {buttonText && (
-        <Text
-          style={[
-            textStyle,
-            { color: isSelected ? themes.colors.branco : themes.colors.verdeEscuro }, // Cor do texto baseada no estado de seleção
-          ]}
-        >
-          {buttonText}
-        </Text>
+      {({ pressed }) => (
+        <>
+          {iconSource && (
+            <Image
+              source={iconSource}
+              style={[
+                iconStyle,
+                {
+                  tintColor:
+                    isSelected !== undefined 
+                      ? isSelected
+                        ? themes.colors.branco 
+                        : themes.colors.verdeEscuro 
+                      : pressed 
+                      ? themes.colors.branco 
+                      : themes.colors.verdeEscuro, 
+                },
+              ]}
+              resizeMode="contain"
+              testID="button-icon"
+            />
+          )}
+          {buttonText && (
+            <Text
+              style={[
+                textStyle,
+                {
+                  color:
+                    isSelected !== undefined 
+                      ? isSelected
+                        ? themes.colors.branco 
+                        : themes.colors.verdeEscuro 
+                      : pressed 
+                      ? themes.colors.branco 
+                      : themes.colors.verdeEscuro, 
+                },
+              ]}
+            >
+              {buttonText}
+            </Text>
+          )}
+        </>
       )}
     </Pressable>
   );
