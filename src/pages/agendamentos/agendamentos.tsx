@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, Image, Modal, ScrollView, Pressable } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, Image, Modal, ScrollView, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
@@ -8,125 +8,197 @@ import { themes } from "../../global/themes";
 import { icons } from "../../global/icons";
 import { style } from "./styles";
 
-import { Button } from "../../components/button/button"; 
+import { Button } from "../../components/button/button";
+import { cancelEvent, getScheduledEvents, getCurrentUser } from "../../../services/calendlyService";
+
+interface Evento {
+    uri: string;
+    name: string;
+    start_time: string;
+    end_time: string;
+    event_type: string;
+    invitees_counter: number;
+    location: {
+        type: string;
+        location: string;
+    };
+    created_at: string;
+    updated_at: string;
+}
+
+const formatDate = (dateTimeString: string) => {
+    const date = new Date(dateTimeString);
+    return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
 
 export default function Agendamentos() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [pressionadoMessages, setPressionadoMessages] = useState<{ [key: string]: boolean }>({});
-  const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [eventoSelecionado, setEventoSelecionado] = useState<string | null>(null);
+    const [eventos, setEventos] = useState<Evento[]>([]);
+    const [isCanceling, setIsCanceling] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
-  // Define o tipo de `messages` como as chaves válidas de `themes.strings`
-  const messages: (keyof typeof themes.strings)[] = [
-    "message1",
-    "message2",
-    "message3",
-    "message4",
-    "message5",
-    "message6",
-    "message7",
-    "message8",
-  ];
+    useEffect(() => {
+        async function loadData() {
+            setIsLoading(true);
+            setError(null);
+            try {
+                const userData = await getCurrentUser();
+                const data = await getScheduledEvents(userData.resource.uri);
+                setEventos(data.collection as Evento[]);
+            } catch (error: any) {
+                console.error("Erro ao buscar eventos:", error.response?.data || error.message);
+                setError("Erro ao buscar eventos. Tente novamente.");
+                Alert.alert("Erro", "Erro ao buscar eventos. Tente novamente.");
+            } finally {
+                setIsLoading(false);
+            }
+        }
 
-  const handlePressIn = (message: string) => {
-    setHorarioSelecionado(message);
-    setPressionadoMessages((prev) => ({ ...prev, [message]: true }));
-  };
+        loadData();
+    }, []);
 
-  const handlePressOut = (message: string) => {
-    setPressionadoMessages((prev) => ({ ...prev, [message]: false }));
-  };
+    const handleCancelarEvento = async () => {
+        if (!eventoSelecionado || isCanceling) {
+            return;
+        }
 
-  return (
-    <View style={style.container}>
-      {/* Cabeçalho */}
-      <View style={style.boxTop}>
-        <Image source={icons.logo} style={style.logo} resizeMode="contain" />
-        <Text style={style.textAgendamentos}>{themes.strings.agendamentos}</Text>
-        <Image source={icons.linha} style={style.linhaCima} resizeMode="contain" />
-      </View>
+        setIsCanceling(true);
 
-      {/* Lista de horários */}
-      <ScrollView contentContainerStyle={style.horariosContainer}>
-        {messages.map((message) => (
-          <View key={message} style={style.boxButtonMessages}>
+        try {
+            const eventUuid = eventoSelecionado.substring(eventoSelecionado.lastIndexOf('/') + 1).trim();
+            console.log("UUID do evento:", eventUuid);
+
+            await cancelEvent(eventUuid, "Cancelado pelo usuário");
+            setEventos(prevEventos => prevEventos.filter(evento => evento.uri !== eventoSelecionado));
+
+            setModalVisible(false);
+            Alert.alert("Sucesso", "Evento cancelado com sucesso!");
+        } catch (error: any) {
+            console.error("Erro ao cancelar evento:", error.response?.data || error.message);
+            Alert.alert("Erro", "Erro ao cancelar evento. Tente novamente.");
+            setModalVisible(false);
+        } finally {
+            setIsCanceling(false);
+        }
+    };
+
+    const renderEvento = (evento: Evento) => {
+        const startTime = new Date(evento.start_time);
+        const formattedDate = startTime.toLocaleDateString('pt-BR');
+        const formattedTime = startTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        return (
             <Pressable
-              style={({ pressed }) => [
-                style.buttonMessages,
-                horarioSelecionado === message && style.buttonMessagesSelected,
-                {
-                  backgroundColor:
-                    pressed || horarioSelecionado === message
-                      ? themes.colors.verdeEscuro
-                      : themes.colors.branco5,
-                },
-              ]}
-              onPressIn={() => handlePressIn(message)}
-              onPressOut={() => handlePressOut(message)}
-            >
-              {({ pressed }) => (
-                <Text
-                  style={[
-                    style.textMsgAgendamentos,
-                    horarioSelecionado === message && style.textMsgAgendamentosSelected,
+                key={evento.uri}
+                style={({ pressed }) => [
+                    style.buttonMessages,
+                    eventoSelecionado === evento.uri && style.buttonMessagesSelected,
                     {
-                      color:
-                        pressed || horarioSelecionado === message
-                          ? themes.colors.branco
-                          : themes.colors.verdeEscuro,
+                        backgroundColor:
+                            pressed || eventoSelecionado === evento.uri
+                                ? themes.colors.verdeEscuro
+                                : themes.colors.branco5,
                     },
-                  ]}
+                ]}
+                onPress={() => setEventoSelecionado(evento.uri)}
+            >
+                <Text
+                    style={[
+                        style.textMsgAgendamentos,
+                        eventoSelecionado === evento.uri && style.textMsgAgendamentosSelected,
+                        {
+                            color:
+                                eventoSelecionado === evento.uri
+                                    ? themes.colors.branco
+                                    : themes.colors.verdeEscuro,
+                        },
+                    ]}
                 >
-                  {themes.strings[message]}
+                    {evento.name} - {formattedDate} às {formattedTime}
                 </Text>
-              )}
             </Pressable>
-          </View>
-        ))}
-      </ScrollView>
+        );
+    };
 
-      {/* Rodapé */}
-      <View style={style.rodape}>
-        <Image source={icons.linha} style={style.linhaBaixo} resizeMode="contain" />
-        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}>
-          <Button
-            iconSource={icons.voltar}
-            buttonStyle={style.buttonVoltar}
-            iconStyle={style.Voltar}
-            onPress={() => navigation.navigate("Menu")}
-          />
+    const isCancelarButtonDisabled = !eventoSelecionado || isCanceling;
 
-          <Button
-            buttonText={themes.strings.cancelarAge}
-            buttonStyle={style.buttonCancelar}
-            textStyle={style.textCancelarAgendamento}
-            onPress={() => setModalVisible(true)}
-          />
+    return (
+        <View style={style.container}>
+            {/* Cabeçalho */}
+            <View style={style.boxTop}>
+                <Image source={icons.logo} style={style.logo} resizeMode="contain" />
+                <Text style={style.textAgendamentos}>{themes.strings.agendamentos}</Text>
+                <Image source={icons.linha} style={style.linhaCima} resizeMode="contain" />
+            </View>
+
+            {/* Lista de eventos */}
+            <ScrollView contentContainerStyle={style.horariosContainer}>
+                {isLoading ? (
+                    <Text style={style.loadingText}>Carregando eventos...</Text>
+                ) : error ? (
+                    <Text style={style.errorText}>{error}</Text>
+                ) : eventos.length > 0 ? (
+                    eventos.map(renderEvento)
+                ) : (
+                    <Text style={style.noEventsText}>Nenhum evento agendado.</Text>
+                )}
+            </ScrollView>
+
+            {/* Rodapé */}
+            <View style={style.rodape}>
+                <Image source={icons.linha} style={style.linhaBaixo} resizeMode="contain" />
+                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}>
+                    <Button
+                        iconSource={icons.voltar}
+                        buttonStyle={style.buttonVoltar}
+                        iconStyle={style.Voltar}
+                        onPress={() => navigation.navigate("Menu")}
+                    />
+
+                    <Button
+                        buttonText={themes.strings.cancelarAge}
+                        buttonStyle={[
+                            style.buttonCancelar,
+                            { opacity: isCancelarButtonDisabled ? 0.5 : 1 },
+                        ]}
+                        textStyle={style.textCancelarAgendamento}
+                        onPress={() => setModalVisible(true)}
+                        disabled={isCancelarButtonDisabled}
+                    />
+                </View>
+            </View>
+
+            {/* Modal de confirmação */}
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={style.modalOverlay}>
+                    <View style={style.modalContent}>
+                        <Text style={style.confirmaCancelamento}>{themes.strings.agendCancelado}</Text>
+                        <Image source={icons.verificado} style={style.verificado} resizeMode="contain" />
+                    </View>
+
+                    <Button
+                        buttonText={themes.strings.confirmar}
+                        buttonStyle={style.modalButton}
+                        textStyle={style.confirma}
+                        onPress={handleCancelarEvento}
+                    />
+                </View>
+            </Modal>
         </View>
-      </View>
-
-      {/* Modal de confirmação */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={style.modalOverlay}>
-          <View style={style.modalContent}>
-            <Text style={style.confirmaCancelamento}>{themes.strings.agendCancelado}</Text>
-            <Image source={icons.verificado} style={style.verificado} resizeMode="contain" />
-          </View>
-
-          <Button
-            buttonText={themes.strings.confirmar}
-            buttonStyle={style.modalButton}
-            textStyle={style.confirma}
-            onPress={() => setModalVisible(false)}
-          />
-        </View>
-      </Modal>
-    </View>
-  );
+    );
 }

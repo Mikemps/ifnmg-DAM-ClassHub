@@ -189,6 +189,14 @@ export const style = StyleSheet.create({
     color: themes.colors.verdeEscuro,
     fontFamily: themes.fonts.jaro,
   },
+
+  eventTypeContainer:{},
+  eventTypeTitle:{},
+  eventTypeButton:{},
+  eventTypeButtonSelected:{},
+  eventTypeText:{},
+  eventTypeTextSelected:{},
+  
 });
 
 export const calendarTheme = {

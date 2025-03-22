@@ -153,4 +153,51 @@ export const style = StyleSheet.create({
     fontSize: themes.font_size.m,
     fontFamily: themes.fonts.jaro,
   },
+
+    eventItem: {
+      padding: 15,
+      width: 300,
+      borderBottomWidth: 1,
+      backgroundColor: themes.colors.branco, // Cor de fundo dos botões
+      borderRadius: 10, // Bordas arredondadas
+      marginVertical: 5, // Espaçamento vertical entre os botões
+  },
+  eventName: {
+      fontSize: 20,
+      textAlign: 'center',
+      color: themes.colors.verdeEscuro, // Cor do texto
+      fontFamily: themes.fonts.jaro, // Fonte
+  },
+  eventInfo: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 5,
+  },
+  eventDate: {
+      fontSize: 20,
+      color: themes.colors.verdeEscuro, // Cor do texto
+      fontFamily: themes.fonts.jaro, // Fonte
+  },
+  eventTime: {
+      fontSize: 20,
+      color: themes.colors.verdeEscuro, // Cor do texto
+      fontFamily: themes.fonts.jaro, // Fonte
+      textAlign: 'right',
+  },
+  loadingText: {
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 20,
+  },
+  errorText: {
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 20,
+      color: 'red',
+  },
+  noEventsText: {
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 20,
+  }
 });
