@@ -33,7 +33,7 @@ export const style = StyleSheet.create({
   },
 
   calendar: {
-    width: 400,
+    width: 375,
   },
 
   arrowContainer: {
@@ -55,12 +55,12 @@ export const style = StyleSheet.create({
   horariosContainer: {
     width: '100%',
     alignItems: 'center',
-    top: 10
+    top: 10,
   },
 
   horariosTitle: {
     fontSize: themes.font_size.g,
-    fontWeight: '400',
+    fontWeight: '500',
     color: themes.colors.verdeEscuro,
     fontFamily: themes.fonts.jaro,
     marginTop: 15,

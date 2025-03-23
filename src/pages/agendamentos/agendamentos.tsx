@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, Modal, ScrollView, Pressable, Alert,  } from "react-native";
+import { Text, View, Image, Modal, ScrollView, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
@@ -56,14 +56,14 @@ export default function Agendamentos() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  {/* Carrega os eventos agendados */}
+  // Carrega os eventos agendados
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
       setError(null);
       try {
         const userData = await getCurrentUser();
-        const data = await getScheduledEvents(userData.resource.uri);
+        const data = await getScheduledEvents(userData.resource.uri, { count: 50 }); // Aumente o número de eventos retornados
         setEventos(data.collection as Evento[]);
       } catch (error: any) {
         console.error("Erro ao buscar eventos:", error.response?.data || error.message);
@@ -77,7 +77,7 @@ export default function Agendamentos() {
     loadData();
   }, []);
 
-  {/* Função para cancelar um evento */}
+  // Função para cancelar um evento
   const handleCancelarEvento = async () => {
     if (!eventoSelecionado || isCanceling) {
       return;
@@ -106,7 +106,7 @@ export default function Agendamentos() {
   {/* Renderiza cada evento na lista */}
   const renderEvento = (evento: Evento) => {
     const { formattedDate, formattedTime } = formatDate(evento.start_time);
-  
+
     return (
       <Pressable
         key={evento.uri}
@@ -158,7 +158,10 @@ export default function Agendamentos() {
       </View>
 
       {/* Lista de eventos */}
-      <ScrollView contentContainerStyle={style.eventosList}>
+      <ScrollView
+        contentContainerStyle={style.eventosList}
+        showsVerticalScrollIndicator={false} 
+      >
         {isLoading ? (
           <Text style={style.loadingText}>Carregando eventos...</Text>
         ) : error ? (

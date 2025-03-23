@@ -153,37 +153,37 @@ export default function Agendar() {
       </View>
 
       <Image source={icons.linha} style={style.linhaMeio} resizeMode="contain" />
+      <Text style={style.horariosTitle}>{themes.strings.textHorarios}</Text>
 
       {/* Horários */}
       <ScrollView contentContainerStyle={style.horariosContainer}>
-      <Text style={style.horariosTitle}>{themes.strings.textHorarios}</Text>
-      <View style={style.horariosGrid}>
-        {isLoading ? (
-          <Text style={style.textMsgHorarios}>Carregando horários...</Text>
-        ) : error ? (
-          <Text style={[style.textMsgHorarios, { color: themes.colors.verdeEscuro }]}>{error}</Text>
-        ) : availableTimes.length > 0 ? (
-          availableTimes.map((horario) => (
-            <Button
-              key={horario}
-              buttonText={horario}
-              buttonStyle={[
-                style.buttonHorarios,
-                horarioSelecionado === horario && style.buttonHorariosSelected,
-              ]}
-              textStyle={[
-                style.textMsgHorarios,
-                horarioSelecionado === horario && style.textMsgHorariosSelected,
-              ]}
-              isSelected={horarioSelecionado === horario} // Controla o estado de seleção
-              onPress={() => handlePressIn(horario)} // Ao clicar, seleciona o horário
-            />
-          ))
-        ) : (
-          <Text style={style.textMsgHorarios}>Nenhum horário disponível para este dia.</Text>
-        )}
-      </View>
-    </ScrollView>
+        <ScrollView style={{ maxHeight: 200 }} contentContainerStyle={style.horariosGrid}>
+          {isLoading ? (
+            <Text style={style.textMsgHorarios}>Carregando horários...</Text>
+          ) : error ? (
+            <Text style={[style.textMsgHorarios, { color: themes.colors.verdeEscuro }]}>{error}</Text>
+          ) : availableTimes.length > 0 ? (
+            availableTimes.map((horario) => (
+              <Button
+                key={horario}
+                buttonText={horario}
+                buttonStyle={[
+                  style.buttonHorarios,
+                  horarioSelecionado === horario && style.buttonHorariosSelected,
+                ]}
+                textStyle={[
+                  style.textMsgHorarios,
+                  horarioSelecionado === horario && style.textMsgHorariosSelected,
+                ]}
+                isSelected={horarioSelecionado === horario} 
+                onPress={() => handlePressIn(horario)} 
+              />
+            ))
+          ) : (
+            <Text style={style.textMsgHorarios}>Nenhum horário disponível para este dia.</Text>
+          )}
+        </ScrollView>
+      </ScrollView>
 
       {/* Rodapé */}
       <View style={style.rodape}>

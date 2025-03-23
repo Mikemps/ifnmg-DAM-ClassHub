@@ -72,21 +72,17 @@ export const createSchedulingUrl = async (event_type: string) => {
     }
 };
 
-// Função para listar eventos agendados
-export const getScheduledEvents = async (userUri: string) => {
-    try {
-        const response = await api.get('/scheduled_events', {
-            params: {
-                user: userUri,
-                count: 10
-            },
-        });
-        return response.data;
-    } catch (error: any) {
-        console.error('Erro ao buscar eventos agendados:', error.response?.data || error.message);
-        throw error;
-    }
-};
+// No arquivo do serviço (calendlyService.ts)
+export const getScheduledEvents = async (userUri: string, options: { count?: number } = {}) => {
+    const { count = 10 } = options; // Valor padrão de 10 eventos
+    const response = await api.get(`/scheduled_events`, {
+      params: {
+        user: userUri,
+        count: count, // Passa o parâmetro count para a API
+      },
+    });
+    return response.data;
+  };
 
 // Função para buscar os horários disponíveis de um tipo de evento
 export const getEventTypeAvailableTimes = async (eventTypeId: string, startTime: string, endTime: string) => {

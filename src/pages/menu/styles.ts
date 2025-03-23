@@ -43,7 +43,7 @@ export const style = StyleSheet.create({
     borderRadius: 30,
     gap: 10,
     elevation: 4,
-    top: 200
+    top: 150,
   },
 
   textAgendar: {
