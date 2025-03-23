@@ -34,16 +34,7 @@ export const themes = {
         confirmar: "Ok",
                 
         textHorarios: "Horários", 
-
-        message1: "30 de Janeiro de 2025                              09:00h",
-        message2: "30 de Janeiro de 2025                                13:30h",
-        message3: "31 de Janeiro de 2025                                09:00h",
-        message4: "04 de Fevereiro de 2025                          10:30h",
-        message5: "04 de Fevereiro de 2025                          15:00h",
-        message6: "04 de Fevereiro de 2025                          16:30h",
-        message7: "10 de Fevereiro de 2025                          07:30h",
-        message8: "10 de Fevereiro de 2025                          09:00h",
-        
+ 
         horario1: "07:30",
         horario2: "09:00",
         horario3: "10:30", 

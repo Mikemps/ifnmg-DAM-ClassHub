@@ -36,23 +36,6 @@ export const style = StyleSheet.create({
     marginBottom: 10,
   },
 
-  boxButtonMessages: {
-    width: '90%',
-    marginBottom: 10,
-    alignSelf: 'center',
-  },
-
-  buttonMessages: {
-    width: '100%',
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  buttonMessagesSelected: {
-    backgroundColor: themes.colors.verdeEscuro,
-  },
-
   textMsgAgendamentosSelected: {
     color: themes.colors.branco,
   },

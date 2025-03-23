@@ -79,25 +79,27 @@ export default function Agendamentos() {
 
   // Função para cancelar um evento
   const handleCancelarEvento = async () => {
-    if (!eventoSelecionado || isCanceling) {
+    if (!eventoSelecionado) {
+      Alert.alert("Atenção", "Nenhum evento selecionado.");
       return;
     }
-
+  
+    if (isCanceling) return; // Evita múltiplos cliques
     setIsCanceling(true);
-
+  
     try {
       const eventUuid = eventoSelecionado.substring(eventoSelecionado.lastIndexOf('/') + 1).trim();
-      console.log("UUID do evento:", eventUuid);
-
       await cancelEvent(eventUuid, "Cancelado pelo usuário");
       setEventos(prevEventos => prevEventos.filter(evento => evento.uri !== eventoSelecionado));
-
       setModalVisible(false);
       Alert.alert("Sucesso", "Evento cancelado com sucesso!");
     } catch (error: any) {
       console.error("Erro ao cancelar evento:", error.response?.data || error.message);
-      Alert.alert("Erro", "Erro ao cancelar evento. Tente novamente.");
-      setModalVisible(false);
+      if (error.response?.data?.title === "Permission Denied" && error.response?.data?.message === "Event is already canceled") {
+        Alert.alert("Atenção", "Este evento já foi cancelado.");
+      } else {
+        Alert.alert("Erro", "Erro ao cancelar evento. Tente novamente.");
+      }
     } finally {
       setIsCanceling(false);
     }
