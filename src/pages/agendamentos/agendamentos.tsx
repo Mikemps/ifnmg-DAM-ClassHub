@@ -24,6 +24,7 @@ interface Evento {
   };
   created_at: string;
   updated_at: string;
+  status: string;
 }
 
 // Função para formatar a data e hora
@@ -63,8 +64,17 @@ export default function Agendamentos() {
       setError(null);
       try {
         const userData = await getCurrentUser();
-        const data = await getScheduledEvents(userData.resource.uri, { count: 50 }); // Aumente o número de eventos retornados
-        setEventos(data.collection as Evento[]);
+        const data = await getScheduledEvents(userData.resource.uri, { count: 50 });
+  
+        // Filtra os eventos cancelados e os eventos que já passaram
+        const eventosAtivos = data.collection.filter((evento: Evento) => {
+          const eventoCancelado = evento.status === "canceled";
+          const eventoJaPassou = new Date(evento.end_time) < new Date(); // Verifica se o evento já terminou
+  
+          return !eventoCancelado && !eventoJaPassou; // Mantém apenas eventos ativos e não passados
+        });
+  
+        setEventos(eventosAtivos as Evento[]);
       } catch (error: any) {
         console.error("Erro ao buscar eventos:", error.response?.data || error.message);
         setError("Erro ao buscar eventos. Tente novamente.");
@@ -73,11 +83,10 @@ export default function Agendamentos() {
         setIsLoading(false);
       }
     }
-
+  
     loadData();
   }, []);
-
-  // Função para cancelar um evento
+  
   const handleCancelarEvento = async () => {
     if (!eventoSelecionado) {
       Alert.alert("Atenção", "Nenhum evento selecionado.");
@@ -90,7 +99,13 @@ export default function Agendamentos() {
     try {
       const eventUuid = eventoSelecionado.substring(eventoSelecionado.lastIndexOf('/') + 1).trim();
       await cancelEvent(eventUuid, "Cancelado pelo usuário");
-      setEventos(prevEventos => prevEventos.filter(evento => evento.uri !== eventoSelecionado));
+  
+      // Atualiza a lista de eventos após o cancelamento
+      const userData = await getCurrentUser();
+      const data = await getScheduledEvents(userData.resource.uri, { count: 50 });
+      const eventosAtivos = data.collection.filter((evento: Evento) => evento.status !== "canceled");
+  
+      setEventos(eventosAtivos as Evento[]);
       setModalVisible(false);
       Alert.alert("Sucesso", "Evento cancelado com sucesso!");
     } catch (error: any) {
