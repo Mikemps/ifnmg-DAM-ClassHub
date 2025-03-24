@@ -77,7 +77,7 @@ export const style = StyleSheet.create({
     marginBottom: 25,
     elevation: 4,
   },
-
+  
   buttonHorariosDisabled: {
     backgroundColor: themes.colors.branco,
     opacity: 0.5, 
