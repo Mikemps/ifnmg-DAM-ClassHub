@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, Modal, ScrollView, Pressable, Alert, Linking } from "react-native";
+import { Text, View, Image, Modal, ScrollView, Alert, Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/types";
@@ -41,7 +41,6 @@ export default function Agendar() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Lista de horários fixos
   const horariosFixos = [
     "07:30",
     "09:00",
@@ -51,7 +50,6 @@ export default function Agendar() {
     "16:30",
   ];
 
-  // Verifica se um horário está disponível
   const isHorarioDisponivel = (horario: string) => {
     return availableTimes.includes(horario);
   };
@@ -65,7 +63,7 @@ export default function Agendar() {
         const eventTypesData = await getEventTypes(userData.resource.uri);
         setEventTypes(eventTypesData);
         if (eventTypesData.length > 0) {
-          setSelectedEventType(eventTypesData[0].uri); // Seleciona o primeiro tipo de evento automaticamente
+          setSelectedEventType(eventTypesData[0].uri); 
         }
       } catch (error: any) {
         console.error("Erro ao carregar dados:", error.response?.data || error.message);

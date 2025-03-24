@@ -1,4 +1,3 @@
-// calendlyService.ts
 import axios from 'axios';
 
 const BASE_URL = 'https://api.calendly.com';
@@ -14,7 +13,7 @@ api.interceptors.request.use(config => {
   const token = process.env.EXPO_PUBLIC_API_TOKEN;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
-    console.log("Token adicionado ao header:", token); // Verificação
+    console.log("Token adicionado ao header:", token);
   }
   return config;
 }, error => {
@@ -46,18 +45,17 @@ export const getEventTypes = async (userUri: string): Promise<EventType[]> => {
     }
     const response = await api.get('/event_types', {
       params: {
-        user: userUri,  // Adicione o userUri como parâmetro
+        user: userUri, 
       }
     });
-    cachedEventTypes = response.data.collection as EventType[]; // Cast aqui
-    return response.data.collection as EventType[]; // Cast aqui
+    cachedEventTypes = response.data.collection as EventType[];
+    return response.data.collection as EventType[];
   } catch (error: any) {
     console.error('Erro ao buscar tipos de eventos:', error.response?.data || error.message);
     return [];
   }
 };
 
-// Função para criar uma URL de agendamento de uso único
 export const createSchedulingUrl = async (event_type: string) => {
   try {
     const response = await api.post('/scheduling_links', {
@@ -72,7 +70,6 @@ export const createSchedulingUrl = async (event_type: string) => {
   }
 };
 
-// No arquivo do serviço (calendlyService.ts)
 export const getScheduledEvents = async (userUri: string, options: { count?: number } = {}) => {
   const { count = 10 } = options;
   const response = await api.get(`/scheduled_events`, {
@@ -82,18 +79,17 @@ export const getScheduledEvents = async (userUri: string, options: { count?: num
     },
   });
   
-  console.log("Resposta da API:", response.data); // Verifique se o campo status está presente
+  console.log("Resposta da API:", response.data); 
   return response.data;
 };
 
-// Função para buscar os horários disponíveis de um tipo de evento
 export const getEventTypeAvailableTimes = async (eventTypeId: string, startTime: string, endTime: string) => {
   try {
     const response = await api.get('/event_type_available_times', {
       params: {
-          event_type: eventTypeId,
-          start_time: startTime,
-          end_time: endTime
+        event_type: eventTypeId,
+        start_time: startTime,
+        end_time: endTime
       },
     });
     return response.data;
@@ -103,16 +99,15 @@ export const getEventTypeAvailableTimes = async (eventTypeId: string, startTime:
   }
 };
 
-// Função para cancelar um evento
 export const cancelEvent = async (eventUuid: string, reason?: string) => {
     try {
         console.log("UUID:", eventUuid);
 
         const response = await api.post(`/scheduled_events/${eventUuid}/cancellation`, {
-            reason: reason || "Cancelado pelo usuário" // Motivo padrão
+            reason: reason || "Cancelado pelo usuário" 
         });
 
-        console.log("Resposta do cancelamento:", response.data); // Verificação
+        console.log("Resposta do cancelamento:", response.data); 
         return response.data;
     } catch (error: any) {
         console.error('Erro ao cancelar evento:', error.response?.data || error.message);

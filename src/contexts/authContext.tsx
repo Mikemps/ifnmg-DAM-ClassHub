@@ -1,16 +1,13 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-// Definindo o tipo para o contexto
 type AuthContextType = {
   isAuthenticated: boolean;
   login: () => void;
   logout: () => void;
 };
 
-// Criando o contexto
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Criando o provedor do contexto
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -29,7 +26,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook personalizado para usar o contexto
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

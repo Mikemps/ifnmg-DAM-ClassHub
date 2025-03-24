@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-// Definindo o tipo para um agendamento
 type Agendamento = {
   id: string;
   eventTypeUri: string;
@@ -8,17 +7,14 @@ type Agendamento = {
   date: string;
 };
 
-// Definindo o tipo para o contexto
 type AgendamentosContextType = {
   agendamentos: Agendamento[];
   adicionarAgendamento: (agendamento: Agendamento) => void;
   removerAgendamento: (id: string) => void;
 };
 
-// Criando o contexto
 const AgendamentosContext = createContext<AgendamentosContextType | undefined>(undefined);
 
-// Criando o provedor do contexto
 export const AgendamentosProvider = ({ children }: { children: ReactNode }) => {
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
 
@@ -37,7 +33,6 @@ export const AgendamentosProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook personalizado para usar o contexto
 export const useAgendamentos = () => {
   const context = useContext(AgendamentosContext);
   if (!context) {

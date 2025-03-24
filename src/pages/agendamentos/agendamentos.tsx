@@ -6,7 +6,7 @@ import { RootStackParamList } from "../../@types/types";
 
 import { themes } from "../../global/themes";
 import { icons } from "../../global/icons";
-import { style } from "./styles"; // Importando os estilos
+import { style } from "./styles"; 
 
 import { Button } from "../../components/button/button";
 import { cancelEvent, getScheduledEvents, getCurrentUser } from "../../../services/calendlyService";
@@ -27,7 +27,7 @@ interface Evento {
   status: string;
 }
 
-// Função para formatar a data e hora
+{/* Função para formatar a data e hora */}
 const formatDate = (dateTimeString: string) => {
   const date = new Date(dateTimeString);
   const optionsDate: Intl.DateTimeFormatOptions = {

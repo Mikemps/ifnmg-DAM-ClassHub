@@ -11,15 +11,15 @@ import Agendar from "../pages/agendar/agendar";
 const Stack = createNativeStackNavigator<RootStackParamList>(); 
 
 export default function Routes() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Splash" component={Splash} />
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Menu" component={Menu} />
-                <Stack.Screen name="Agendar" component={Agendar} />
-                <Stack.Screen name="Agendamentos" component={Agendamentos} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="Agendar" component={Agendar} />
+        <Stack.Screen name="Agendamentos" component={Agendamentos} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

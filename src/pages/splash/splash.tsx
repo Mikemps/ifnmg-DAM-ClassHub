@@ -10,25 +10,25 @@ import { icons } from "../../global/icons";
 type SplashScreenNavigationProp = StackNavigationProp<RootStackParamList, "Splash">;
 
 export default function TelaSplash() {
-    const navigation = useNavigation<SplashScreenNavigationProp>();
+  const navigation = useNavigation<SplashScreenNavigationProp>();
 
-    useEffect(() => {
-        const navigationTimer = setTimeout(() => {
-            navigation.replace("Login");
-        }, 3000); 
+  useEffect(() => {
+    const navigationTimer = setTimeout(() => {
+      navigation.replace("Login");
+    }, 3000); 
 
-        return () => {
-            clearTimeout(navigationTimer);
-        };
-    }, [navigation]);
+    return () => {
+      clearTimeout(navigationTimer);
+    };
+  }, [navigation]);
 
-    return (
-        <View style={style.container}>
-            <Image
-                source={icons.splash}
-                style={style.splashImage}
-                resizeMode="contain"
-            />
-        </View>
-    );
+  return (
+    <View style={style.container}>
+      <Image
+        source={icons.splash}
+        style={style.splashImage}
+        resizeMode="contain"
+      />
+    </View>
+  );
 }
