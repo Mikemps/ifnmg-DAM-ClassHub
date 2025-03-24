@@ -169,37 +169,35 @@ export default function Agendar() {
       <Text style={style.horariosTitle}>{themes.strings.textHorarios}</Text>
 
       {/* Horários */}
-      <ScrollView contentContainerStyle={style.horariosContainer}>
-        <ScrollView style={{ maxHeight: 200 }} contentContainerStyle={style.horariosGrid}>
-          {isLoading ? (
-            <Text style={style.textMsgHorarios}>{themes.strings.carregandohora}</Text>
-          ) : error ? (
-            <Text style={[style.textMsgHorarios, { color: themes.colors.verdeEscuro }]}>{error}</Text>
-          ) : (
-            horariosFixos.map((horario) => {
-              const disponivel = isHorarioDisponivel(horario);
-              return (
-                <Button
-                  key={horario}
-                  buttonText={horario}
-                  buttonStyle={[
-                    style.buttonHorarios,
-                    !disponivel && style.buttonHorariosDisabled, 
-                    horarioSelecionado === horario && style.buttonHorariosSelected,
-                  ]}
-                  textStyle={[
-                    style.textMsgHorarios,
-                    !disponivel && style.textMsgHorariosDisabled,
-                    horarioSelecionado === horario && style.textMsgHorariosSelected,
-                  ]}
-                  isSelected={horarioSelecionado === horario}
-                  onPress={disponivel ? () => handlePressIn(horario) : undefined}
-                  disabled={!disponivel} 
-                />
-              );
-            })
-          )}
-        </ScrollView>
+      <ScrollView style={{ maxHeight: 200 }} contentContainerStyle={style.horariosContainer} showsVerticalScrollIndicator={false}>
+        {isLoading ? (
+          <Text style={style.textMsgHorarios}>{themes.strings.carregandoHora}</Text>
+        ) : error ? (
+          <Text style={[style.textMsgHorarios, { color: themes.colors.verdeEscuro }]}>{error}</Text>
+        ) : (
+          horariosFixos.map((horario) => {
+            const disponivel = isHorarioDisponivel(horario);
+            return (
+              <Button
+                key={horario}
+                buttonText={horario}
+                buttonStyle={[
+                  style.buttonHorarios,
+                  !disponivel && style.buttonHorariosDisabled, 
+                  horarioSelecionado === horario && style.buttonHorariosSelected,
+                ]}
+                textStyle={[
+                  style.textMsgHorarios,
+                  !disponivel && style.textMsgHorariosDisabled,
+                  horarioSelecionado === horario && style.textMsgHorariosSelected,
+                ]}
+                isSelected={horarioSelecionado === horario}
+                onPress={disponivel ? () => handlePressIn(horario) : undefined}
+                disabled={!disponivel} 
+              />
+            );
+          })
+        )}
       </ScrollView>
 
       {/* Rodapé */}
@@ -235,7 +233,7 @@ export default function Agendar() {
       >
         <View style={style.modalOverlay}>
           <View style={style.modalContent}>
-            <Text style={style.confirmaAgendamento}>{themes.strings.agendEfetuado}</Text>
+            <Text style={style.confirmaAgendamento}>{themes.strings.redirecionamento}</Text>
             <Image source={icons.verificado} style={style.verificado} resizeMode="contain" />
           </View>
 

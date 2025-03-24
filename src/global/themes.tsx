@@ -13,9 +13,9 @@ export const themes = {
     podkova: 'Podkova-Regular',
   },
   font_size:{
-    p: 17,
-    m: 20,
-    g: 24,
+    p: 15,
+    m: 18,
+    g: 22,
   },
 
   strings: {
@@ -30,8 +30,8 @@ export const themes = {
     cancelarAge: "Cancelar Agendamento",
 
     textHorarios: "Horários",
-    carregandohora: "Carregando horários...",
-    agendEfetuado: "Você será redirecionado para\no Calendly para concluir\nseu agendamento",
+    carregandoHora: "Carregando horários...",
+    redirecionamento: "Você será redirecionado para\no Calendly para concluir\nseu agendamento",
     confirmar: "Ok",
 
     agendCancelado: "Agendamento cancelado\ncom sucesso",

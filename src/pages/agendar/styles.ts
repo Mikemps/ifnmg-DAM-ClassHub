@@ -53,9 +53,11 @@ export const style = StyleSheet.create({
   },
 
   horariosContainer: {
-    width: '100%',
-    alignItems: 'center',
-    top: 10,
+    width: '90%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    top: 20,
   },
 
   horariosTitle: {
@@ -64,14 +66,6 @@ export const style = StyleSheet.create({
     color: themes.colors.verdeEscuro,
     fontFamily: themes.fonts.jaro,
     marginTop: 15,
-  },
-
-  horariosGrid: {
-    width: '90%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginTop: 20,
   },
 
   buttonHorarios: {
@@ -95,6 +89,7 @@ export const style = StyleSheet.create({
   textMsgHorarios: {
     fontSize: themes.font_size.m,
     fontFamily: themes.fonts.jaro,
+    color: themes.colors.verdeEscuro,
   },
 
   buttonHorariosSelected: {
