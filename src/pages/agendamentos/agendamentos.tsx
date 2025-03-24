@@ -64,7 +64,7 @@ export default function Agendamentos() {
       setError(null);
       try {
         const userData = await getCurrentUser();
-        const data = await getScheduledEvents(userData.resource.uri, { count: 50 });
+        const data = await getScheduledEvents(userData.resource.uri, { count: 100 });
   
         const eventosAtivos = data.collection.filter((evento: Evento) => {
           const eventoCancelado = evento.status === "canceled";
