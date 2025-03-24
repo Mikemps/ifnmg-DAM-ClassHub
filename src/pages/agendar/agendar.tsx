@@ -41,6 +41,21 @@ export default function Agendar() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Lista de horários fixos
+  const horariosFixos = [
+    "07:30",
+    "09:00",
+    "10:30",
+    "13:30",
+    "15:00",
+    "16:30",
+  ];
+
+  // Verifica se um horário está disponível
+  const isHorarioDisponivel = (horario: string) => {
+    return availableTimes.includes(horario);
+  };
+
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
@@ -94,11 +109,11 @@ export default function Agendar() {
   };
 
   const handlePressIn = (horario: string) => {
-    setHorarioSelecionado(horario);
-  };
-
-  const handlePressOut = () => {
-    // Não precisa fazer nada aqui, já que o estado é controlado por onPressIn
+    if (horarioSelecionado === horario) {
+      setHorarioSelecionado(null);
+    } else {
+      setHorarioSelecionado(horario);
+    }
   };
 
   const handleAgendarEvento = async () => {
@@ -159,28 +174,32 @@ export default function Agendar() {
       <ScrollView contentContainerStyle={style.horariosContainer}>
         <ScrollView style={{ maxHeight: 200 }} contentContainerStyle={style.horariosGrid}>
           {isLoading ? (
-            <Text style={style.textMsgHorarios}>Carregando horários...</Text>
+            <Text style={style.textMsgHorarios}>{themes.strings.carregandohora}</Text>
           ) : error ? (
             <Text style={[style.textMsgHorarios, { color: themes.colors.verdeEscuro }]}>{error}</Text>
-          ) : availableTimes.length > 0 ? (
-            availableTimes.map((horario) => (
-              <Button
-                key={horario}
-                buttonText={horario}
-                buttonStyle={[
-                  style.buttonHorarios,
-                  horarioSelecionado === horario && style.buttonHorariosSelected,
-                ]}
-                textStyle={[
-                  style.textMsgHorarios,
-                  horarioSelecionado === horario && style.textMsgHorariosSelected,
-                ]}
-                isSelected={horarioSelecionado === horario} 
-                onPress={() => handlePressIn(horario)} 
-              />
-            ))
           ) : (
-            <Text style={style.textMsgHorarios}>Nenhum horário disponível para este dia.</Text>
+            horariosFixos.map((horario) => {
+              const disponivel = isHorarioDisponivel(horario);
+              return (
+                <Button
+                  key={horario}
+                  buttonText={horario}
+                  buttonStyle={[
+                    style.buttonHorarios,
+                    !disponivel && style.buttonHorariosDisabled, 
+                    horarioSelecionado === horario && style.buttonHorariosSelected,
+                  ]}
+                  textStyle={[
+                    style.textMsgHorarios,
+                    !disponivel && style.textMsgHorariosDisabled,
+                    horarioSelecionado === horario && style.textMsgHorariosSelected,
+                  ]}
+                  isSelected={horarioSelecionado === horario}
+                  onPress={disponivel ? () => handlePressIn(horario) : undefined}
+                  disabled={!disponivel} 
+                />
+              );
+            })
           )}
         </ScrollView>
       </ScrollView>

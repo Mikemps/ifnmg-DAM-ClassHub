@@ -29,18 +29,15 @@ export const themes = {
         agendar: "Agendar",
         cancelarAge: "Cancelar Agendamento",
 
-        agendCancelado: "Agendamento cancelado\ncom sucesso.",
-        agendEfetuado: "Agendamento efetuado\ncom sucesso.",
+        textHorarios: "Horários",
+        carregandohora: "Carregando horários...",
+        agendEfetuado: "Você será redirecionado para\no Calendly para concluir\nseu agendamento",
         confirmar: "Ok",
-                
-        textHorarios: "Horários", 
- 
-        horario1: "07:30",
-        horario2: "09:00",
-        horario3: "10:30", 
-        horario4: "13:30",
-        horario5: "15:00", 
-        horario6: "16:30",
+
+        agendCancelado: "Agendamento cancelado\ncom sucesso",
+        carregandoEvento: "Carregando eventos...",
+        nenhumAge: "Nenhum evento agendado no momento",
+        
     },
 
     data:{

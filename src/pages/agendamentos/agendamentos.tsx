@@ -57,7 +57,7 @@ export default function Agendamentos() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Carrega os eventos agendados
+  {/* Carrega os eventos agendados */}
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
@@ -66,15 +66,17 @@ export default function Agendamentos() {
         const userData = await getCurrentUser();
         const data = await getScheduledEvents(userData.resource.uri, { count: 50 });
   
-        // Filtra os eventos cancelados e os eventos que já passaram
         const eventosAtivos = data.collection.filter((evento: Evento) => {
           const eventoCancelado = evento.status === "canceled";
-          const eventoJaPassou = new Date(evento.end_time) < new Date(); // Verifica se o evento já terminou
-  
-          return !eventoCancelado && !eventoJaPassou; // Mantém apenas eventos ativos e não passados
+          const eventoJaPassou = new Date(evento.end_time) < new Date();
+          return !eventoCancelado && !eventoJaPassou;
         });
   
-        setEventos(eventosAtivos as Evento[]);
+        const eventosOrdenados = eventosAtivos.sort((a: Evento, b: Evento) => {
+          return new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
+        });
+  
+        setEventos(eventosOrdenados as Evento[]);
       } catch (error: any) {
         console.error("Erro ao buscar eventos:", error.response?.data || error.message);
         setError("Erro ao buscar eventos. Tente novamente.");
@@ -83,31 +85,27 @@ export default function Agendamentos() {
         setIsLoading(false);
       }
     }
-  
     loadData();
   }, []);
   
+  {/* Cancela os eventos agendados */}
   const handleCancelarEvento = async () => {
     if (!eventoSelecionado) {
       Alert.alert("Atenção", "Nenhum evento selecionado.");
       return;
     }
   
-    if (isCanceling) return; // Evita múltiplos cliques
+    if (isCanceling) return; 
     setIsCanceling(true);
   
     try {
       const eventUuid = eventoSelecionado.substring(eventoSelecionado.lastIndexOf('/') + 1).trim();
-      await cancelEvent(eventUuid, "Cancelado pelo usuário");
+      await cancelEvent(eventUuid, "Cancelado pelo usuário"); 
   
-      // Atualiza a lista de eventos após o cancelamento
-      const userData = await getCurrentUser();
-      const data = await getScheduledEvents(userData.resource.uri, { count: 50 });
-      const eventosAtivos = data.collection.filter((evento: Evento) => evento.status !== "canceled");
-  
-      setEventos(eventosAtivos as Evento[]);
-      setModalVisible(false);
-      Alert.alert("Sucesso", "Evento cancelado com sucesso!");
+      setEventos(prevEventos => prevEventos.filter(evento => evento.uri !== eventoSelecionado));
+      setModalVisible(true);
+      setEventoSelecionado(null); 
+
     } catch (error: any) {
       console.error("Erro ao cancelar evento:", error.response?.data || error.message);
       if (error.response?.data?.title === "Permission Denied" && error.response?.data?.message === "Event is already canceled") {
@@ -123,6 +121,13 @@ export default function Agendamentos() {
   {/* Renderiza cada evento na lista */}
   const renderEvento = (evento: Evento) => {
     const { formattedDate, formattedTime } = formatDate(evento.start_time);
+    const handleSelecionarEvento = (uri: string) => {
+      if (eventoSelecionado === uri) {
+        setEventoSelecionado(null);
+      } else {
+        setEventoSelecionado(uri);
+      }
+    };
 
     return (
       <Pressable
@@ -137,7 +142,7 @@ export default function Agendamentos() {
                 : themes.colors.branco5,
           },
         ]}
-        onPress={() => setEventoSelecionado(evento.uri)}
+        onPress={() => handleSelecionarEvento(evento.uri)} 
       >
         {({ pressed }) => (
           <>
@@ -163,8 +168,6 @@ export default function Agendamentos() {
     );
   };
 
-  const isCancelarButtonDisabled = !eventoSelecionado || isCanceling;
-
   return (
     <View style={style.container}>
       {/* Cabeçalho */}
@@ -180,13 +183,13 @@ export default function Agendamentos() {
         showsVerticalScrollIndicator={false} 
       >
         {isLoading ? (
-          <Text style={style.loadingText}>Carregando eventos...</Text>
+          <Text style={style.loadingText}>{themes.strings.carregandoEvento}</Text>
         ) : error ? (
           <Text style={style.errorText}>{error}</Text>
         ) : eventos.length > 0 ? (
           eventos.map(renderEvento)
         ) : (
-          <Text style={style.noEventsText}>Nenhum evento agendado.</Text>
+          <Text style={style.noEventsText}>{themes.strings.nenhumAge}</Text>
         )}
       </ScrollView>
 
@@ -205,11 +208,11 @@ export default function Agendamentos() {
             buttonText={themes.strings.cancelarAge}
             buttonStyle={[
               style.buttonCancelar,
-              { opacity: isCancelarButtonDisabled ? 0.5 : 1 },
+              { opacity: !eventoSelecionado ? 0.5 : 1 }, 
             ]}
             textStyle={style.textCancelarAgendamento}
-            onPress={() => setModalVisible(true)}
-            disabled={isCancelarButtonDisabled}
+            onPress={handleCancelarEvento}
+            disabled={!eventoSelecionado} 
           />
         </View>
       </View>
@@ -231,7 +234,7 @@ export default function Agendamentos() {
             buttonText={themes.strings.confirmar}
             buttonStyle={style.modalButton}
             textStyle={style.confirma}
-            onPress={handleCancelarEvento}
+            onPress={() => setModalVisible(false)} 
           />
         </View>
       </Modal>

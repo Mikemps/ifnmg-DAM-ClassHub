@@ -84,6 +84,14 @@ export const style = StyleSheet.create({
     elevation: 4,
   },
 
+  buttonHorariosDisabled: {
+    backgroundColor: themes.colors.branco,
+    opacity: 0.5, 
+  },
+  textMsgHorariosDisabled: {
+    color: themes.colors.verdeEscuro, 
+  },
+
   textMsgHorarios: {
     fontSize: themes.font_size.m,
     fontFamily: themes.fonts.jaro,
